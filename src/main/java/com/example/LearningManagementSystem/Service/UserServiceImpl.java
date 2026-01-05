@@ -21,14 +21,13 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public UserResponseDTO createUser(UserRequestDTO request) {
+    public UserResponseDTO register(UserRequestDTO request) {
         User user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         User newUser = repository.save(user);
-
         return userMapper.toDto(newUser);
     }
 }

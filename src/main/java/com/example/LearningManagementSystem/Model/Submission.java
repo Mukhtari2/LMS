@@ -20,7 +20,7 @@ public class Submission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Assignment assignmentId;
-    private Student studentId;
+    private Long studentId;
     private String fileUrl;
     private String answeredAt;
     private Integer grade;

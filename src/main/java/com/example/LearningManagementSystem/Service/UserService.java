@@ -5,6 +5,6 @@ import com.example.LearningManagementSystem.Dto.UserResponseDTO;
 import com.example.LearningManagementSystem.Model.User;
 
 public interface UserService {
-    UserResponseDTO createUser(UserRequestDTO request);
+    UserResponseDTO register(UserRequestDTO request);
 
 }

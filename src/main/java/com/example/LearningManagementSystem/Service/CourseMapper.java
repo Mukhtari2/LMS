@@ -3,9 +3,9 @@ package com.example.LearningManagementSystem.Service;
 import com.example.LearningManagementSystem.Dto.CourseRequestDTO;
 import com.example.LearningManagementSystem.Dto.CourseResponseDTO;
 import com.example.LearningManagementSystem.Model.Course;
+import org.mapstruct.Mapper;
 
-public interface CourseService {
-    CourseResponseDTO createCourse(CourseRequestDTO requestDTO);
-    Course updateCourse();
-
+@Mapper
+public interface CourseMapper {
+    CourseResponseDTO toDto(Course course);
 }
