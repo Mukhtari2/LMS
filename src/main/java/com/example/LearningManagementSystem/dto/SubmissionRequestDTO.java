@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class SubmissionResponseDTO {
+public class SubmissionRequestDTO {
     private Long id;
     private Assignment assignmentId;
     private Long studentId;

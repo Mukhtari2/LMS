@@ -1,25 +1,28 @@
-//package com.example.LearningManagementSystem.model;
-//
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
-//import jakarta.persistence.Id;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Entity
-//public class Submission {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
-//    private Assignment assignmentId;
-//    private Long studentId;
-//    private String fileUrl;
-//    private String answeredAt;
-//    private Integer grade;
-//    private String feedback;
-//}
+package com.example.LearningManagementSystem.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "submissions")
+public class Submission {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne()
+    @JoinColumn(name = "assignments_Id")
+    private Assignment assignmentId;
+    private Long studentId;
+    private String fileUrl;
+    private String answeredAt;
+    private Integer grade;
+    private String feedback;
+}
