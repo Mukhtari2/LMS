@@ -2,6 +2,7 @@ package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.dto.AssignmentRequestDTO;
 import com.example.LearningManagementSystem.dto.AssignmentResponseDTO;
+import com.example.LearningManagementSystem.mapper.AssignmentMapper;
 import com.example.LearningManagementSystem.model.Assignment;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.AssignmentRepository;
@@ -37,7 +38,8 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public Assignment findByAssignmentId(Long id) {
-        return assignmentRepository.findById(id).orElseThrow();
+    public Assignment findByAssignmentId(Long assignmentId) {
+        return assignmentRepository.findById(assignmentId).orElseThrow();
     }
+
 }

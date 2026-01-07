@@ -1,8 +1,8 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.Enum.Status;
 import com.example.LearningManagementSystem.dto.CourseRequestDTO;
 import com.example.LearningManagementSystem.dto.CourseResponseDTO;
+import com.example.LearningManagementSystem.mapper.CourseMapper;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;

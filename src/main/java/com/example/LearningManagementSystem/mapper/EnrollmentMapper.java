@@ -1,4 +1,4 @@
-package com.example.LearningManagementSystem.service;
+package com.example.LearningManagementSystem.mapper;
 
 import com.example.LearningManagementSystem.dto.EnrollmentRequestDTO;
 import com.example.LearningManagementSystem.dto.EnrollmentResponseDTO;

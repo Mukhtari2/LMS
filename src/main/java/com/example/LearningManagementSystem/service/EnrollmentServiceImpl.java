@@ -2,16 +2,14 @@ package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.dto.EnrollmentRequestDTO;
 import com.example.LearningManagementSystem.dto.EnrollmentResponseDTO;
+import com.example.LearningManagementSystem.mapper.EnrollmentMapper;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.model.Enrollment;
 import com.example.LearningManagementSystem.repository.EnrollmentRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service

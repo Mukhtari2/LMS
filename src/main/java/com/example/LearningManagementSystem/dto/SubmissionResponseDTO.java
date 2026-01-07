@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SubmissionResponseDTO {
     private Long id;
-    private Assignment assignmentId;
+    private Long assignmentId;
     private Long studentId;
     private String fileUrl;
     private String answeredAt;
