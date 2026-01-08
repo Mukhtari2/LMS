@@ -18,6 +18,7 @@ public class CourseServiceImpl implements CourseService{
     private final CourseRepository repository;
     private final CourseMapper courseMapper;
 
+
     @PreAuthorize("hasRole('TEACHER')")
     @Override
     public CourseResponseDTO registerCourse(CourseRequestDTO requestDTO) {
