@@ -6,16 +6,17 @@ import com.example.LearningManagementSystem.model.Assignment;
 import com.example.LearningManagementSystem.model.Submission;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = "spring", imports = {java.util.Date.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {java.util.Date.class})
 public interface SubmissionMapper {
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "assignment_Id", source = "request.assignment")
-    @Mapping(target = "student_Id", source = "request.studentId")
-    @Mapping(target = "answerText", source = "request.answerText")
-    @Mapping(target = "submittedAt", expression = "java.newDate(System.currentTimeMillis())")
-    @Mapping(target = "grade", source = "request.grade")
-    @Mapping(target = "feedback", source = "request.feedback")
+    @Mapping(target = "assignment", source = "assignment")
+    @Mapping(target = "studentId", source = "requestDTO.studentId")
+    @Mapping(target = "answeredAt", source = "requestDTO.answeredAt")
+    @Mapping(target = "submittedAt", expression = "java(new Date(System.currentTimeMillis()))")
+    @Mapping(target = "grade", source = "requestDTO.grade")
+    @Mapping(target = "feedback", source = "requestDTO.feedback")
     Submission toEntity(SubmissionRequestDTO requestDTO, Assignment assignment);
     SubmissionResponseDTO toDto(Submission submission);
 }

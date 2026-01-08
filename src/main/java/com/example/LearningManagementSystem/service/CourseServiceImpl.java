@@ -6,6 +6,7 @@ import com.example.LearningManagementSystem.mapper.CourseMapper;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,8 +16,9 @@ import java.util.Optional;
 public class CourseServiceImpl implements CourseService{
 
     private final CourseRepository repository;
-    private CourseMapper courseMapper;
+    private final CourseMapper courseMapper;
 
+    @PreAuthorize("hasRole('TEACHER')")
     @Override
     public CourseResponseDTO registerCourse(CourseRequestDTO requestDTO) {
         Course course = Course.builder()
@@ -34,6 +36,7 @@ public class CourseServiceImpl implements CourseService{
         return repository.findById(courseId).orElseThrow();
     }
 
+    @PreAuthorize("hasRole('TEACHER')")
     @Override
     public Course updateCourse() {
         return null;

@@ -8,6 +8,7 @@ import com.example.LearningManagementSystem.model.Enrollment;
 import com.example.LearningManagementSystem.repository.EnrollmentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +18,10 @@ import java.util.List;
 public class EnrollmentServiceImpl implements EnrollmentService {
 
     private final EnrollmentRepository enrollmentRepository;
-    private EnrollmentMapper enrollmentMapper;
+    private final EnrollmentMapper enrollmentMapper;
     private final CourseService courseService;
 
+    @PreAuthorize("hasRole('STUDENT')")
     @Override
     public EnrollmentResponseDTO enrollPublishedCourse(EnrollmentRequestDTO request) {
         Course course = courseService.findByCourseId(request.getCourseId());
@@ -27,7 +29,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
             Enrollment enroll = enrollmentMapper.toEntity(request, course);
             Enrollment savedEnrollment = enrollmentRepository.save(enroll);
             return enrollmentMapper.toDto(savedEnrollment);
-        } else throw new EntityNotFoundException("not found");
+        } else throw new EntityNotFoundException("Course with ID " + request.getCourseId());
     }
 
     @Override

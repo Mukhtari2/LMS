@@ -8,6 +8,7 @@ import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.AssignmentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,16 +17,17 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     private final CourseService courseService;
     private final AssignmentRepository assignmentRepository;
-    private AssignmentMapper assignmentMapper;
+    private final AssignmentMapper assignmentMapper;
 
     @Override
     public AssignmentResponseDTO viewAssignment(AssignmentRequestDTO requestDTO) {
-        return assignmentRepository.findById(requestDTO.getId())
-                .map(assignmentMapper::toDto)
-                .orElseThrow(() -> new EntityNotFoundException
-                        ("Assignment not found with ID: " + requestDTO.getId()));
+        Course course = courseService.findByCourseId(requestDTO.getCourseId());
+        Assignment assignment = assignmentMapper.toEntity(requestDTO, course);
+        Assignment savedAssignment = assignmentRepository.save(assignment);
+        return assignmentMapper.toDto(savedAssignment);
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @Override
     public AssignmentResponseDTO submitAssignment(AssignmentRequestDTO requestDTO) {
         Course course = courseService.findByCourseId(requestDTO.getCourseId());

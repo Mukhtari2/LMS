@@ -12,6 +12,6 @@ import java.util.Date;
 public class EnrollmentResponseDTO {
     private Long id;
     private Long studentId;
-    private Long courseId;
+    private Course courseId;
     private Date enrolledAt;
 }

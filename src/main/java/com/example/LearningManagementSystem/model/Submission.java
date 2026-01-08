@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -19,10 +21,11 @@ public class Submission {
 
     @ManyToOne()
     @JoinColumn(name = "assignments_Id")
-    private Assignment assignmentId;
+    private Assignment assignment;
     private Long studentId;
     private String fileUrl;
     private String answeredAt;
     private Integer grade;
     private String feedback;
+    private Date submittedAt;
 }

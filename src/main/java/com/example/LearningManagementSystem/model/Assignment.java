@@ -20,8 +20,8 @@ public class Assignment {
     private Long id;
     @ManyToOne()
     @JoinColumn(name = "courses_Id")
-    private Course courseId;
-    private String tittle;
+    private Course course;
+    private String title;
     private String description;
     private Date dueDate;
 }

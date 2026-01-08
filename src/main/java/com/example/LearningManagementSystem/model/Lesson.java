@@ -15,7 +15,7 @@ public class Lesson {
     private Long id;
     @ManyToOne()
     @JoinColumn(name = "courses_Id")
-    private Course courseId;
+    private Course course;
     private String title;
     private String contentUrl;
 }

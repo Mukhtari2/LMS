@@ -6,14 +6,16 @@ import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.model.Lesson;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+
 public interface LessonMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "courseId", source = "course")
-    @Mapping(target = "title", source = "request.getTitle")
-    @Mapping(target = "contentUrl", source = "request.getContentUrl")
+    @Mapping(target = "course", source = "courseId")
+    @Mapping(target = "title", source = "lessonRequestDTO.title")
+    @Mapping(target = "contentUrl", source = "lessonRequestDTO.contentUrl")
     Lesson toEntity(LessonRequestDTO lessonRequestDTO, Course courseId);
     LessonResponseDTO toDto(Lesson lesson);
 }

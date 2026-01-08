@@ -8,6 +8,7 @@ import com.example.LearningManagementSystem.model.Lesson;
 import com.example.LearningManagementSystem.repository.LessonRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 
@@ -17,8 +18,9 @@ public class LessonServiceImpl implements LessonService{
 
     private final CourseService courseService;
     private final LessonRepository repository;
-    private LessonMapper lessonMapper;
+    private final LessonMapper lessonMapper;
 
+    @PreAuthorize("hasRole('TEACHER')")
     @Override
     public LessonResponseDTO addLesson(LessonRequestDTO request) {
         Course course = courseService.findByCourseId(request.getCourseId());

@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LessonResponseDTO {
     private Long id;
-    private Course courseId;
+    private Long courseId;
     private String title;
     private String contentUrl;
 }

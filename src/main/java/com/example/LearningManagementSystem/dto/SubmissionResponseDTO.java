@@ -4,6 +4,8 @@ import com.example.LearningManagementSystem.model.Assignment;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @RequiredArgsConstructor
 public class SubmissionResponseDTO {
@@ -14,4 +16,5 @@ public class SubmissionResponseDTO {
     private String answeredAt;
     private Integer grade;
     private String feedback;
+    private Date submittedAt;
 }
