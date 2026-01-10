@@ -14,7 +14,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document
+@Document(collection = "enrollments")
 public class Enrollment {
     private String id;
     private Long studentId;
