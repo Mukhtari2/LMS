@@ -1,20 +1,26 @@
 package com.example.LearningManagementSystem.dto;
 
 import com.example.LearningManagementSystem.model.Assignment;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Setter
+@Getter
+@ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class SubmissionRequestDTO {
+
     private Long assignmentId;
+
     private Long studentId;
+
     private String fileUrl;
+
     private String answeredAt;
+
     private Integer grade;
+
     private String feedback;
 }

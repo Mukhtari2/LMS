@@ -2,16 +2,22 @@ package com.example.LearningManagementSystem.dto;
 
 //import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.model.Course;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Setter
+@Getter
+@ToString
 @RequiredArgsConstructor
 public class EnrollmentResponseDTO {
+
     private Long id;
+
     private Long studentId;
+
     private Course courseId;
+
     private Date enrolledAt;
+
 }

@@ -1,12 +1,17 @@
 package com.example.LearningManagementSystem.dto;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-@Data
+@Setter
+@Getter
+@ToString
 @RequiredArgsConstructor
 public class UserResponseDTO {
-    private Long id;
+
+    private String id;
+
     private String name;
+
     private String email;
+
 }

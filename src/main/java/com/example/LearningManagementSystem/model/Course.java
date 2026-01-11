@@ -5,7 +5,9 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
+@Setter
+@Getter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,8 +15,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Course {
     @Id
     private String id;
+
     private String title;
+
     private String description;
+
     private Long teacherId;
+
     private Status status;
+
 }

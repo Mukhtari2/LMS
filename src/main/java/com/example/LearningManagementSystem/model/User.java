@@ -11,17 +11,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Data
+@Setter
+@Getter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "users")
 public class User implements UserDetails {
+
     @Id
     private String id;
+
     private String name;
+
     private String email;
+
     private String password;
+
     private Role role;
 
 

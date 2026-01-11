@@ -1,19 +1,19 @@
-spring:
-  data:
-    mongodb:
-      database: Mukhtar2_Integration_Test
-
-  # Standard way to disable security in tests without custom code
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
-
-logging:
-  level:
-    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
-
-# Keep your custom property if your code specifically checks for it
-app:
-  security:
-    enabled: false
-
+#
+#logging:
+#  level:
+#    org.springframework.data.mongodb: DEBUG
+#
+#spring:
+#  main:
+#    allow-bean-definition-overriding: true
+#
+#  # Standard way to disable security in tests without custom code
+#  autoconfigure:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+#
+## Keep your custom property if your code specifically checks for it
+#app:
+#  security:
+#    enabled: false
+#
