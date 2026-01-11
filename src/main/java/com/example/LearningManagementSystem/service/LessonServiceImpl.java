@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.ReadOnlyFileSystemException;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -26,12 +27,19 @@ public class LessonServiceImpl implements LessonService{
     @PreAuthorize("hasRole('TEACHER')")
     @Override
     public LessonResponseDTO addLesson(LessonRequestDTO request) {
-        Course course = courseService.findByCourseId(request.getCourseId());
-        if (course != null) {
-            Lesson newLesson = lessonMapper.toEntity(request, course);
-            Lesson savedLesson = repository.insert(newLesson);
-            return lessonMapper.toDto(savedLesson);
-        }else throw new ResourceNotFoundException("No course Id available for adding lessson");
+//        Course course = courseService.findByCourseId(request.getCourseId());
+//        if (course != null) {
+//            Lesson newLesson = lessonMapper.toEntity(request, course);
+//            Lesson savedLesson = repository.insert(newLesson);
+//            return lessonMapper.toDto(savedLesson);
+//        }else throw new ResourceNotFoundException("No course Id available for adding lessson");
+
+
+        return Optional.ofNullable(courseService.findByCourseId(request.getCourseId()))
+                .map(course -> lessonMapper.toEntity(request, course))
+                .map(repository::insert)
+                .map(lessonMapper::toDto)
+                .orElseThrow(() -> new ResourceNotFoundException("No course Id available for adding lesson"));
 
     }
 }

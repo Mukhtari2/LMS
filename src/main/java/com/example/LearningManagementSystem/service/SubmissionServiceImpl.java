@@ -24,13 +24,20 @@ public class SubmissionServiceImpl implements SubmissionService{
     @PreAuthorize("hasRole('STUDENT')")
     @Override
     public SubmissionResponseDTO submitAnswers(SubmissionRequestDTO requestDTO) {
-        Assignment assignment = assignmentService.findByAssignmentId(requestDTO.getAssignmentId());
-        if (assignment == null) {
-            throw new ResourceNotFoundException("No assignment Id found for this submission");
-        }
-            Submission submission = submissionMapper.toEntity(requestDTO, assignment);
-            Submission newSubmission = submissionRepository.insert(submission);
-            return submissionMapper.toDto(newSubmission);
+//        Assignment assignment = assignmentService.findByAssignmentId(requestDTO.getAssignmentId());
+//        if (assignment == null) {
+//            throw new ResourceNotFoundException("No assignment Id found for this submission");
+//        }
+//            Submission submission = submissionMapper.toEntity(requestDTO, assignment);
+//            Submission newSubmission = submissionRepository.insert(submission);
+//            return submissionMapper.toDto(newSubmission);
+
+        return Optional.ofNullable(assignmentService.findByAssignmentId(requestDTO.getAssignmentId()))
+                .map(assignment -> submissionMapper.toEntity(requestDTO, assignment))
+                .map(submissionRepository::insert)
+                .map(submissionMapper::toDto)
+                .orElseThrow(() -> new ResourceNotFoundException("No assignment Id found for this submission"));
+
     }
 
 
