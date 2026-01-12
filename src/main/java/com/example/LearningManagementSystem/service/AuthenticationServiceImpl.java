@@ -15,14 +15,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public @Nullable AuthenticationResponse register(AuthenticationRequest request) {
         User user = User.builder()
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public @Nullable AuthenticationResponse login(AuthenticationRequest request) {
+    public @Nullable AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),

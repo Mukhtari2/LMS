@@ -13,12 +13,10 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Testcontainers
 @ActiveProfiles("test")
-class UserServiceImplTest {
+class AuthenticationServiceImplTest {
 
     @Container
     static MongoDBContainer mongoDBContainer =
@@ -37,7 +35,7 @@ class UserServiceImplTest {
     private UserRepository userRepository;
 
     @Autowired
-    private UserService userService;
+    private AuthenticationService authenticationService;
 
 
 //    @BeforeEach
