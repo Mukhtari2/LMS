@@ -11,7 +11,5 @@ public interface CourseService {
 
     CourseResponseDTO updateCourse(String courseId, CourseRequestDTO requestDTO);
 
-    Optional<Course> findOptionalByCourseId(String courseId);
-
     Course findByCourseId(String courseId);
 }

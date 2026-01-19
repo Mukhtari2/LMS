@@ -19,7 +19,6 @@ public class CourseServiceImpl implements CourseService{
 
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
-    private final CourseService courseService;
 
     @PreAuthorize("hasRole('TEACHER')")
     @Override
@@ -43,29 +42,9 @@ public class CourseServiceImpl implements CourseService{
     @PreAuthorize("hasRole('TEACHER')")
     @Override
     public CourseResponseDTO updateCourse(String courseId, CourseRequestDTO requestDTO) {
-        // 1. Find the existing course
-        Course existingCourse = courseService.findByCourseId(courseId);
-
-        // 2. Check if the course exists
-        if (existingCourse != null) {
-            // 3. Map new data from the DTO to the existing entity
-            courseMapper.updateEntityFromDto(requestDTO, existingCourse);
-
-            // 4. Save the updated entity
-            Course updatedCourse = courseRepository.save(existingCourse);
-
-            // 5. Return the mapped DTO
-            return courseMapper.toDto(updatedCourse);
-        } else {
-            // 6. Handle the missing resource
-            throw new ResourceNotFoundException("Course not found with ID: " + courseId);
-        }
-    }
-
-
-
-    @Override
-    public Optional<Course> findOptionalByCourseId(String courseId) {
-        return courseRepository.findById(courseId);
+       Course existingCourse = courseRepository.findById(courseId).orElseThrow(()-> new ResourceNotFoundException("No course found with the Id " + courseId));
+           courseMapper.updateEntityFromDto(requestDTO, existingCourse);
+           Course updatedCourse = courseRepository.insert(existingCourse);
+           return courseMapper.toDto(updatedCourse);
     }
 }

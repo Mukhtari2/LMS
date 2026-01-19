@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/teacher")
@@ -23,10 +20,16 @@ public class TeacherController {
     private final LessonService lessonService;
     private final AssignmentService assignmentService;
 
-    @PostMapping("/registerCourse")
+    @PostMapping("/register-course")
     public ResponseEntity<CourseResponseDTO> registerCourse (@RequestBody CourseRequestDTO courseRequestDTO){
         CourseResponseDTO courseResponseDTO = courseService.registerCourse(courseRequestDTO);
         return new ResponseEntity<>(courseResponseDTO, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update-course/{courseId}")
+    public ResponseEntity<CourseResponseDTO> updateCourse (@PathVariable String courseId, @RequestBody CourseRequestDTO requestDTO){
+        CourseResponseDTO responseDTO = courseService.updateCourse(courseId, requestDTO);
+        return ResponseEntity.ok(responseDTO);
     }
 
     @PostMapping("/addLesson")
