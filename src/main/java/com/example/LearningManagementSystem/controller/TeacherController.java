@@ -30,7 +30,6 @@ public class TeacherController {
     public ResponseEntity<CourseResponseDTO> updateCourse (@PathVariable String courseId, @RequestBody CourseRequestDTO requestDTO){
         CourseResponseDTO responseDTO = courseService.updateCourse(courseId, requestDTO);
         return ResponseEntity.ok(responseDTO);
-
     }
 
     @PostMapping("/addLesson")

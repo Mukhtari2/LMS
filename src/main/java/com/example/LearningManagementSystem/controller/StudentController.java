@@ -36,6 +36,7 @@ public class StudentController {
     public ResponseEntity<SubmissionResponseDTO> viewSubmission(@PathVariable String assignmentId){
         SubmissionResponseDTO submissionResponse = submissionService.viewSubmission(assignmentId);
         return ResponseEntity.ok(submissionResponse);
+
     }
 
     @GetMapping("/view-assignment/{assignmentId}")
