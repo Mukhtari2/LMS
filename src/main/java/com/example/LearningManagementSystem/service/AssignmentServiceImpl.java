@@ -21,7 +21,6 @@ public class AssignmentServiceImpl implements AssignmentService {
     private final AssignmentMapper assignmentMapper;
 
 
-    @PreAuthorize("hasRole('STUDENT')")
     @Override
     public AssignmentResponseDTO viewAssignment(String courseId) {
         Assignment assignment = assignmentRepository.findById(courseId)
@@ -31,7 +30,6 @@ public class AssignmentServiceImpl implements AssignmentService {
         return assignmentMapper.toDto(assignment);
     }
 
-    @PreAuthorize("hasRole('TEACHER')")
     @Override
     public AssignmentResponseDTO createAssignment(AssignmentRequestDTO requestDTO) {
         return Optional.ofNullable(courseService.findByCourseId(requestDTO.getCourseId()))

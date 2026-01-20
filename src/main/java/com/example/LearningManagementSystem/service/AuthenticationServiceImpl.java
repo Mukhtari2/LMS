@@ -8,6 +8,7 @@ import com.example.LearningManagementSystem.model.User;
 import com.example.LearningManagementSystem.repository.UserRepository;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
 
+    @Lazy
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -50,6 +52,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     }
 
+    @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

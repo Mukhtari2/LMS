@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/teacher")
-@PreAuthorize("hasRole('TEACHER')")
 @RequiredArgsConstructor
 public class TeacherController {
 
@@ -21,24 +20,28 @@ public class TeacherController {
     private final AssignmentService assignmentService;
 
     @PostMapping("/register-course")
+    @PreAuthorize("hasRole('TEACHER')")
     public ResponseEntity<CourseResponseDTO> registerCourse (@RequestBody CourseRequestDTO courseRequestDTO){
         CourseResponseDTO courseResponseDTO = courseService.registerCourse(courseRequestDTO);
         return new ResponseEntity<>(courseResponseDTO, HttpStatus.CREATED);
     }
 
     @PutMapping("/update-course/{courseId}")
+    @PreAuthorize("hasRole('TEACHER')")
     public ResponseEntity<CourseResponseDTO> updateCourse (@PathVariable String courseId, @RequestBody CourseRequestDTO requestDTO){
         CourseResponseDTO responseDTO = courseService.updateCourse(courseId, requestDTO);
         return ResponseEntity.ok(responseDTO);
     }
 
     @PostMapping("/addLesson")
+    @PreAuthorize("hasRole('TEACHER')")
     public ResponseEntity<LessonResponseDTO> addLesson (LessonRequestDTO lessonRequestDTO){
         LessonResponseDTO newLesson = lessonService.addLesson(lessonRequestDTO);
         return new ResponseEntity<>(newLesson, HttpStatus.CREATED);
     }
 
     @PostMapping("/create-Assignment")
+    @PreAuthorize("hasRole('TEACHER')")
     public ResponseEntity<AssignmentResponseDTO> createAssignment (@RequestBody AssignmentRequestDTO assignmentRequestDTO) {
         AssignmentResponseDTO responseDTO = assignmentService.createAssignment(assignmentRequestDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);

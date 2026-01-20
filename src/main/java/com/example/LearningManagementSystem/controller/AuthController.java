@@ -3,11 +3,13 @@ package com.example.LearningManagementSystem.controller;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationRequest;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationResponse;
 import com.example.LearningManagementSystem.service.AuthenticationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,7 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register (@RequestBody AuthenticationRequest request){
+    public ResponseEntity<AuthenticationResponse> register (@Valid @RequestBody AuthenticationRequest request){
         AuthenticationResponse registerRequest = authenticationService.register(request);
         return new ResponseEntity<>(registerRequest, HttpStatus.CREATED);
 

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/student")
-@PreAuthorize("hasRole('STUDENT')")
 @RequiredArgsConstructor
 public class StudentController {
 
@@ -21,18 +20,21 @@ public class StudentController {
     private final AssignmentService assignmentService;
 
     @PostMapping("/enroll")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<EnrollmentResponseDTO> enrolPublishedCourse(@RequestBody EnrollmentRequestDTO enrollmentRequestDTO) {
         EnrollmentResponseDTO enroll = enrollmentService.enrollPublishedCourse(enrollmentRequestDTO);
         return new ResponseEntity<>(enroll, HttpStatus.CREATED);
     }
 
     @PostMapping("/submit-answer")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<SubmissionResponseDTO>  submitAnswer(@RequestBody SubmissionRequestDTO submissionRequestDTO){
         SubmissionResponseDTO responseDTO = submissionService.submitAnswers(submissionRequestDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/view-submission/{assignmentId}")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<SubmissionResponseDTO> viewSubmission(@PathVariable String assignmentId){
         SubmissionResponseDTO submissionResponse = submissionService.viewSubmission(assignmentId);
         return ResponseEntity.ok(submissionResponse);
@@ -40,6 +42,7 @@ public class StudentController {
     }
 
     @GetMapping("/view-assignment/{assignmentId}")
+    @PreAuthorize("hasRole('STUDENT')")
     public ResponseEntity<AssignmentResponseDTO> viewAssignment (@PathVariable String assignmentId) {
         AssignmentResponseDTO responseDTO = assignmentService.viewAssignment(assignmentId);
         return ResponseEntity.ok(responseDTO);

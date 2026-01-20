@@ -20,7 +20,6 @@ public class CourseServiceImpl implements CourseService{
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
 
-    @PreAuthorize("hasRole('TEACHER')")
     @Override
     public CourseResponseDTO registerCourse(CourseRequestDTO requestDTO) {
         Course course = Course.builder()
@@ -39,7 +38,6 @@ public class CourseServiceImpl implements CourseService{
         return courseRepository.findById(courseId).orElseThrow();
     }
 
-    @PreAuthorize("hasRole('TEACHER')")
     @Override
     public CourseResponseDTO updateCourse(String courseId, CourseRequestDTO requestDTO) {
        Course existingCourse = courseRepository.findById(courseId).orElseThrow(()-> new ResourceNotFoundException("No course found with the Id " + courseId));

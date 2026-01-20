@@ -23,7 +23,7 @@ public class SubmissionServiceImpl implements SubmissionService{
     private final SubmissionRepository submissionRepository;
     private final SubmissionMapper submissionMapper;
 
-    @PreAuthorize("hasRole('STUDENT')")
+
     @Override
     public SubmissionResponseDTO submitAnswers(SubmissionRequestDTO requestDTO) {
 //        Assignment assignment = assignmentService.findByAssignmentId(requestDTO.getAssignmentId());
@@ -42,7 +42,7 @@ public class SubmissionServiceImpl implements SubmissionService{
 
     }
 
-    @PreAuthorize("hasRole('STUDENT')")
+
     @Override
     public SubmissionResponseDTO viewSubmission(String submissionId) {
         Submission id = submissionRepository.findById(submissionId).orElseThrow
@@ -53,7 +53,7 @@ public class SubmissionServiceImpl implements SubmissionService{
     }
 
 
-    @PreAuthorize("hasRole('STUDENT')")
+
     @Override
     public List<SubmissionResponseDTO> viewAllSubmission() {
             return submissionRepository.findAll()

@@ -24,7 +24,7 @@ public class LessonServiceImpl implements LessonService{
     private final LessonRepository repository;
     private final LessonMapper lessonMapper;
 
-    @PreAuthorize("hasRole('TEACHER')")
+
     @Override
     public LessonResponseDTO addLesson(LessonRequestDTO request) {
 //        Course course = courseService.findByCourseId(request.getCourseId());

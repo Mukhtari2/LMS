@@ -23,7 +23,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     private final EnrollmentMapper enrollmentMapper;
     private final CourseService courseService;
 
-    @PreAuthorize("hasRole('STUDENT')")
+
     @Override
     public EnrollmentResponseDTO enrollPublishedCourse(EnrollmentRequestDTO request) {
         return Optional.ofNullable(courseService.findByCourseId(request.getCourseId()))
@@ -33,7 +33,6 @@ public class EnrollmentServiceImpl implements EnrollmentService {
                 .orElseThrow(() -> new ResourceNotFoundException("Course with ID " + request.getCourseId()));
     }
 
-    @PreAuthorize("hasRole('STUDENT')")
     @Override
     public List<EnrollmentResponseDTO> viewAllEnrolledCourses() {
      return enrollmentRepository.findAll().stream().map(enrollmentMapper::toDto).toList();
