@@ -42,7 +42,7 @@ public class CourseServiceImpl implements CourseService{
     public CourseResponseDTO updateCourse(String courseId, CourseRequestDTO requestDTO) {
        Course existingCourse = courseRepository.findById(courseId).orElseThrow(()-> new ResourceNotFoundException("No course found with the Id " + courseId));
            courseMapper.updateEntityFromDto(requestDTO, existingCourse);
-           Course updatedCourse = courseRepository.insert(existingCourse);
+           Course updatedCourse = courseRepository.save(existingCourse);
            return courseMapper.toDto(updatedCourse);
     }
 }

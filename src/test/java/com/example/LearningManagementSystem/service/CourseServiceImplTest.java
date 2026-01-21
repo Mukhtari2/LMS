@@ -69,7 +69,7 @@ class CourseServiceImplTest {
         updateRequest.setTitle("New Updated Title");
         updateRequest.setStatus(Status.PUBLISH);
 
-        assertEquals(0, courseRepository.findAll().size());
+        assertEquals(1, courseRepository.findAll().size());
         CourseResponseDTO updatedCourse = courseService.updateCourse(savedCourse.getId(), updateRequest);
         assertNotNull(updatedCourse);
         assertEquals("New Updated Title", updatedCourse.getTitle());
