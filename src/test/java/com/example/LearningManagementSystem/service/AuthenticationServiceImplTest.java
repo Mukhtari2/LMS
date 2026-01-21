@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
@@ -41,5 +42,6 @@ class AuthenticationServiceImplTest {
         AuthenticationResponse newUser = authenticationService.register(user);
 
         assertNotNull(newUser);
+        assertEquals(0, userRepository.findAll().size());
     }
 }

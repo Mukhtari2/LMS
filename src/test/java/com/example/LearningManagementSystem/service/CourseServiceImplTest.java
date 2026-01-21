@@ -1,5 +1,9 @@
 package com.example.LearningManagementSystem.service;
 
+import com.example.LearningManagementSystem.Enum.Role;
+import com.example.LearningManagementSystem.Enum.Status;
+import com.example.LearningManagementSystem.dto.CourseRequestDTO;
+import com.example.LearningManagementSystem.dto.CourseResponseDTO;
 import com.example.LearningManagementSystem.repository.CourseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +30,15 @@ class CourseServiceImplTest {
 
     @Test
     void registerCourse() {
+        CourseRequestDTO newCourse = new CourseRequestDTO();
+        newCourse.setDescription("Agro_Engineering");
+        newCourse.setRole(Role.TEACHER);
+        newCourse.setTitle("AGR101");
+        newCourse.setTeacherId("12C");
+        newCourse.setStatus(Status.DRAFT);
+        CourseResponseDTO registerCourse = courseService.registerCourse(newCourse);
+
+        assertNotNull(registerCourse);
     }
 
     @Test
