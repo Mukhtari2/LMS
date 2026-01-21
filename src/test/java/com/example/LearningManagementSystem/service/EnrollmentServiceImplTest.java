@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -34,6 +36,7 @@ class EnrollmentServiceImplTest {
     @BeforeEach
     void setUp() {
         enrollmentRepository.deleteAll();
+        courseRepository.deleteAll();
     }
 
     @Test
@@ -51,13 +54,47 @@ class EnrollmentServiceImplTest {
         request.setStudentId("2015/1/57125PL");
 
         EnrollmentResponseDTO response = enrollmentService.enrollPublishedCourse(request);
-        assertEquals(courseId, response.getCourseId());
-        assertEquals(1, enrollmentRepository.count(), "Enrollment should be persisted in DB");
 
         assertNotNull(response);
+        assertEquals(courseId, response.getCourseId().getId());
+        assertEquals("Advanced Petroleum Geology", response.getCourseId().getTitle());
+        assertEquals("2015/1/57125PL", response.getStudentId());
+
+
+        assertEquals(1, enrollmentRepository.count());
+
     }
 
     @Test
     void viewAllEnrolledCourses() {
+        String courseId = "GEL523";
+        Course courseA = new Course();
+        courseA.setId(courseId);
+        courseA.setTitle("Advanced HydroGeology");
+        courseA.setTeacherId("65NA");
+        courseA.setStatus(Status.DRAFT);
+        Course course1 = courseRepository.save(courseA);
+
+        String courseId2 = "GEL312";
+        Course courseB = new Course();
+        courseB.setId(courseId2);
+        courseB.setTitle("Advanced HydroGeology");
+        courseB.setTeacherId("65NA");
+        courseB.setStatus(Status.DRAFT);
+        Course course2 = courseRepository.save(courseB);
+
+        EnrollmentRequestDTO enrollmentRequest = new EnrollmentRequestDTO();
+        enrollmentRequest.setCourseId(course1.getId());
+        enrollmentRequest.setStudentId("2015/1/57654PL");
+        enrollmentService.enrollPublishedCourse(enrollmentRequest);
+
+        EnrollmentRequestDTO enrollmentRequest2 = new EnrollmentRequestDTO();
+        enrollmentRequest2.setCourseId(course2.getId());
+        enrollmentRequest2.setStudentId("2015/1/52112PL");
+        enrollmentService.enrollPublishedCourse(enrollmentRequest2);
+
+        List<EnrollmentResponseDTO> allCourses = enrollmentService.viewAllEnrolledCourses();
+        assertNotNull(allCourses);
+        assertEquals("2015/1/52112PL", allCourses.get(1).getStudentId() );
     }
 }
