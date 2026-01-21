@@ -4,6 +4,7 @@ import com.example.LearningManagementSystem.Enum.Role;
 import com.example.LearningManagementSystem.Enum.Status;
 import com.example.LearningManagementSystem.dto.CourseRequestDTO;
 import com.example.LearningManagementSystem.dto.CourseResponseDTO;
+import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.CourseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,9 +48,32 @@ class CourseServiceImplTest {
 
     @Test
     void findByCourseId() {
+        CourseRequestDTO request = new CourseRequestDTO();
+        request.setTitle("GEO@121");
+        request.setTeacherId("G120");
+        CourseResponseDTO savedCourse = courseService.registerCourse(request);
+
+        Course foundCourse = courseService.findByCourseId(savedCourse.getId());
+        assertNotNull(foundCourse);
+        assertEquals("GEO@121", foundCourse.getTitle());
     }
 
     @Test
     void updateCourse() {
+        CourseRequestDTO request = new CourseRequestDTO();
+        request.setTitle("Old Title");
+        request.setStatus(Status.DRAFT);
+        CourseResponseDTO savedCourse = courseService.registerCourse(request);
+
+        CourseRequestDTO updateRequest = new CourseRequestDTO();
+        updateRequest.setTitle("New Updated Title");
+        updateRequest.setStatus(Status.PUBLISH);
+
+        assertEquals(0, courseRepository.findAll().size());
+        CourseResponseDTO updatedCourse = courseService.updateCourse(savedCourse.getId(), updateRequest);
+        assertNotNull(updatedCourse);
+        assertEquals("New Updated Title", updatedCourse.getTitle());
+        assertEquals(Status.PUBLISH, updatedCourse.getStatus());
+        assertEquals(1, courseRepository.findAll().size());
     }
 }
