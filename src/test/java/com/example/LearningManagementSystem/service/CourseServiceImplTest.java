@@ -36,9 +36,13 @@ class CourseServiceImplTest {
         newCourse.setTitle("AGR101");
         newCourse.setTeacherId("12C");
         newCourse.setStatus(Status.DRAFT);
+
+        assertEquals(0, courseRepository.findAll().size());
         CourseResponseDTO registerCourse = courseService.registerCourse(newCourse);
+        assertEquals(1, courseRepository.findAll().size());
 
         assertNotNull(registerCourse);
+        assertEquals("12C", newCourse.getTeacherId());
     }
 
     @Test
