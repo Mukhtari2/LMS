@@ -31,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .roles(Role.ADMIN)
+                .roles(Role.TEACHER)
                 .build();
         repository.insert(user);
         var jwtToken = jwtService.generateToken(user);

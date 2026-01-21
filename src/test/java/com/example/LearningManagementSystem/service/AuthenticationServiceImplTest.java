@@ -1,6 +1,6 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.Enum.Role;
+
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationRequest;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationResponse;
 import com.example.LearningManagementSystem.repository.UserRepository;
@@ -41,7 +41,5 @@ class AuthenticationServiceImplTest {
         AuthenticationResponse newUser = authenticationService.register(user);
 
         assertNotNull(newUser);
-
-
     }
 }

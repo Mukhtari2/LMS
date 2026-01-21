@@ -39,7 +39,6 @@ public class SubmissionServiceImpl implements SubmissionService{
                 .map(submissionRepository::insert)
                 .map(submissionMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("No assignment Id found for this submission"));
-
     }
 
 
