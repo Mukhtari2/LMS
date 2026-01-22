@@ -1,5 +1,6 @@
 package com.example.LearningManagementSystem.dto;
 
+import com.example.LearningManagementSystem.Enum.Grade;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class SubmissionResponseDTO {
 
     private LocalDateTime answeredAt;
 
-    private Integer grade;
+    private Grade grade;
 
     private String feedback;
 
