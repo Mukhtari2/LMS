@@ -1,8 +1,10 @@
 package com.example.LearningManagementSystem.service;
 
 
+import com.example.LearningManagementSystem.Enum.Role;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationRequest;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationResponse;
+import com.example.LearningManagementSystem.model.User;
 import com.example.LearningManagementSystem.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,8 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
@@ -46,6 +47,27 @@ class AuthenticationServiceImplTest {
         assertNotNull(newUser);
         assertEquals("Musa", user.getName());
         assertEquals("Musa@gmail.com", user.getEmail());
+    }
+
+    @Test
+    void toAuthenticateUser() {
+        String plainPassword = "password123";
+        User userEntity = User.builder()
+                .name("Musa")
+                .email("musa@gmail.com")
+                .password(passwordEncoder.encode(plainPassword))
+                .roles(Role.TEACHER)
+                .build();
+        userRepository.save(userEntity);
+
+        AuthenticationRequest authRequest = new AuthenticationRequest();
+        authRequest.setEmail("musa@gmail.com");
+        authRequest.setPassword(plainPassword);
+
+        AuthenticationResponse response = authenticationService.authenticate(authRequest);
+        assertNotNull(response);
+        assertNotNull(response.getToken());
+        assertFalse(response.getToken().isEmpty());
 
     }
 }
