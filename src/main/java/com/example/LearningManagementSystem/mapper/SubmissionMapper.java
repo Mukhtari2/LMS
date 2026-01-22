@@ -1,5 +1,6 @@
 package com.example.LearningManagementSystem.mapper;
 
+import com.example.LearningManagementSystem.Enum.Grade;
 import com.example.LearningManagementSystem.dto.SubmissionRequestDTO;
 import com.example.LearningManagementSystem.dto.SubmissionResponseDTO;
 import com.example.LearningManagementSystem.model.Assignment;
@@ -8,19 +9,29 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {java.util.Date.class})
+import java.time.LocalDateTime;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {LocalDateTime.class})
 public interface SubmissionMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "assignment", source = "assignment")
     @Mapping(target = "studentId", source = "requestDTO.studentId")
     @Mapping(target = "answeredAt", source = "requestDTO.answeredAt")
     @Mapping(target = "fileUrl", source = "requestDTO.fileUrl")
-    @Mapping(target = "submittedAt", expression = "java(new Date())")
+    @Mapping(target = "submittedAt", expression = "java(LocalDateTime.now())")
     @Mapping(target = "grade", source = "requestDTO.grade")
     @Mapping(target = "feedback", source = "requestDTO.feedback")
-
 
     Submission toEntity(SubmissionRequestDTO requestDTO, Assignment assignment);
     @Mapping(target = "assignmentId", source = "assignment.id")
     SubmissionResponseDTO toDto(Submission submission);
+
+    default Grade mapGrade(int gradeValue) {
+        if (gradeValue >= 70) return Grade.EXCELLENT;
+        if (gradeValue >= 60) return Grade.VERY_GOOD;
+        if (gradeValue >= 50) return Grade.SATISFACTORY;
+        if (gradeValue >= 45) return Grade.GOOD;
+        if (gradeValue >= 40) return Grade.PASS;
+        return Grade.FAIL;
+    }
 }

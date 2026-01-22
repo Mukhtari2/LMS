@@ -2,6 +2,7 @@ package com.example.LearningManagementSystem.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Setter
@@ -18,12 +19,12 @@ public class SubmissionResponseDTO {
 
     private String fileUrl;
 
-    private String answeredAt;
+    private LocalDateTime answeredAt;
 
     private Integer grade;
 
     private String feedback;
 
-    private Date submittedAt;
+    private LocalDateTime submittedAt;
 
 }
