@@ -40,9 +40,9 @@ class AuthenticationServiceImplTest {
         user.setEmail("Musa@gmail.com");
         user.setPassword(passwordEncoder.encode("1234"));
 
-        assertEquals(0, userRepository.findAll().size());
+        assertEquals(0, userRepository.count());
         AuthenticationResponse newUser = authenticationService.register(user);
-        assertEquals(1, userRepository.findAll().size());
+        assertEquals(1, userRepository.count());
         assertNotNull(newUser);
         assertEquals("Musa", user.getName());
         assertEquals("Musa@gmail.com", user.getEmail());

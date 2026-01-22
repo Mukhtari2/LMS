@@ -1,5 +1,6 @@
 package com.example.LearningManagementSystem.service;
 
+import com.example.LearningManagementSystem.Enum.Role;
 import com.example.LearningManagementSystem.Enum.Status;
 import com.example.LearningManagementSystem.dto.CourseResponseDTO;
 import com.example.LearningManagementSystem.dto.EnrollmentRequestDTO;
@@ -73,6 +74,7 @@ class EnrollmentServiceImplTest {
         courseA.setTitle("Advanced HydroGeology");
         courseA.setTeacherId("65NA");
         courseA.setStatus(Status.DRAFT);
+        courseA.setRole(Role.STUDENT);
         Course course1 = courseRepository.save(courseA);
 
         String courseId2 = "GEL312";
@@ -81,6 +83,7 @@ class EnrollmentServiceImplTest {
         courseB.setTitle("Advanced HydroGeology");
         courseB.setTeacherId("65NA");
         courseB.setStatus(Status.DRAFT);
+        courseB.setRole(Role.STUDENT);
         Course course2 = courseRepository.save(courseB);
 
         EnrollmentRequestDTO enrollmentRequest = new EnrollmentRequestDTO();

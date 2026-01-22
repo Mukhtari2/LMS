@@ -38,9 +38,9 @@ class CourseServiceImplTest {
         newCourse.setTeacherId("12C");
         newCourse.setStatus(Status.DRAFT);
 
-        assertEquals(0, courseRepository.findAll().size());
+        assertEquals(0, courseRepository.count());
         CourseResponseDTO registerCourse = courseService.registerCourse(newCourse);
-        assertEquals(1, courseRepository.findAll().size());
+        assertEquals(1, courseRepository.count());
 
         assertNotNull(registerCourse);
         assertEquals("12C", newCourse.getTeacherId());
@@ -69,11 +69,11 @@ class CourseServiceImplTest {
         updateRequest.setTitle("New Updated Title");
         updateRequest.setStatus(Status.PUBLISH);
 
-        assertEquals(1, courseRepository.findAll().size());
+        assertEquals(1, courseRepository.count());
         CourseResponseDTO updatedCourse = courseService.updateCourse(savedCourse.getId(), updateRequest);
         assertNotNull(updatedCourse);
         assertEquals("New Updated Title", updatedCourse.getTitle());
         assertEquals(Status.PUBLISH, updatedCourse.getStatus());
-        assertEquals(1, courseRepository.findAll().size());
+        assertEquals(1, courseRepository.count());
     }
 }

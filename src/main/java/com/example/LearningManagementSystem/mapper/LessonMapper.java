@@ -17,5 +17,6 @@ public interface LessonMapper {
     @Mapping(target = "title", source = "lessonRequestDTO.title")
     @Mapping(target = "contentUrl", source = "lessonRequestDTO.contentUrl")
     Lesson toEntity(LessonRequestDTO lessonRequestDTO, Course courseId);
+    @Mapping(target = "courseId", source = "lesson.course.id")
     LessonResponseDTO toDto(Lesson lesson);
 }

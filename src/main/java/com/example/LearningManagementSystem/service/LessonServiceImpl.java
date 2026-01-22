@@ -4,15 +4,12 @@ import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
 import com.example.LearningManagementSystem.dto.LessonRequestDTO;
 import com.example.LearningManagementSystem.dto.LessonResponseDTO;
 import com.example.LearningManagementSystem.mapper.LessonMapper;
-import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.model.Lesson;
 import com.example.LearningManagementSystem.repository.LessonRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.ReadOnlyFileSystemException;
 import java.util.Optional;
 
 
@@ -21,7 +18,7 @@ import java.util.Optional;
 public class LessonServiceImpl implements LessonService{
 
     private final CourseService courseService;
-    private final LessonRepository repository;
+    private final LessonRepository lessonRepository;
     private final LessonMapper lessonMapper;
 
 
@@ -37,15 +34,15 @@ public class LessonServiceImpl implements LessonService{
 
         return Optional.ofNullable(courseService.findByCourseId(request.getCourseId()))
                 .map(course -> lessonMapper.toEntity(request, course))
-                .map(repository::insert)
+                .map(lessonRepository::insert)
                 .map(lessonMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("No course Id available for adding lesson"));
     }
 
     @Override
     public LessonResponseDTO viewLesson(String lessonId) {
-        Lesson id = repository.findById(lessonId).orElseThrow(() -> new ResourceNotFoundException
-                ("Nolessson found with id " + lessonId));
+        Lesson id = lessonRepository.findById(lessonId).orElseThrow(() -> new ResourceNotFoundException
+                ("No lesson found with id " + lessonId));
         return lessonMapper.toDto(id);
     }
 
