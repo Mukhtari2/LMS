@@ -36,6 +36,7 @@ class LessonServiceImplTest {
     @BeforeEach
     void setUp() {
         lessonRepository.deleteAll();
+        courseRepository.deleteAll();
     }
 
     @Test
@@ -60,29 +61,18 @@ class LessonServiceImplTest {
 
     @Test
     void viewLesson() {
-        String lessonId = "8891ML";
-        Lesson lesson = new Lesson();
-        lesson.setId(lessonId);
-        Lesson newLesson = lessonRepository.save(lesson);
+        String courseId = "CRS-101";
+        Course course = new Course();
+        course.setId(courseId);
+        courseRepository.save(course);
 
         LessonRequestDTO lesson1 = new LessonRequestDTO();
-        lesson1.setCourseId(newLesson.getId());
+        lesson1.setCourseId(courseId);
         lesson1.setTitle("Hydrology");
         lesson1.setContentUrl("https://www.geoworldd.com");
         lessonService.addLesson(lesson1);
 
-//        String courseIdB = "AL900";
-//        Course courseB = new Course();
-//        courseB.setId(courseIdB);
-//        Course savedCourseB = courseRepository.save(courseB);
-//        LessonRequestDTO lesson2 = new LessonRequestDTO();
-//        lesson2.setCourseId(savedCourseB.getId());
-//        lesson2.setTitle("Aquifer Properties");
-//        lesson2.setContentUrl("http://example.com/lesson2");
-//        lessonService.addLesson(lesson2);
-
         LessonResponseDTO savedLessons = lessonService.viewLesson(lesson1.getCourseId());
-//        LessonResponseDTO savedLessons = lessonService.viewLesson(lesson2.getCourseId());
         assertNotNull(savedLessons);
     }
 }

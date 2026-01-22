@@ -40,10 +40,10 @@ public class LessonServiceImpl implements LessonService{
     }
 
     @Override
-    public LessonResponseDTO viewLesson(String lessonId) {
-        Lesson id = lessonRepository.findById(lessonId).orElseThrow(() -> new ResourceNotFoundException
-                ("No lesson found with id " + lessonId));
-        return lessonMapper.toDto(id);
+    public LessonResponseDTO viewLesson(String courseId) {
+        Lesson lesson = lessonRepository.findByCourseId(courseId).orElseThrow(() -> new ResourceNotFoundException
+                ("No lesson found with id " + courseId));
+        return lessonMapper.toDto(lesson);
     }
 
 }
