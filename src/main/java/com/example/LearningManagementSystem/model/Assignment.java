@@ -1,9 +1,11 @@
 package com.example.LearningManagementSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Setter
@@ -23,6 +25,7 @@ public class Assignment {
 
     private String description;
 
-    private Date dueDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d/M/yyyy")
+    private LocalDate dueDate;
 
 }

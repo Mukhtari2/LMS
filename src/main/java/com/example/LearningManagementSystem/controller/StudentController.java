@@ -28,6 +28,13 @@ public class StudentController {
         return new ResponseEntity<>(enroll, HttpStatus.CREATED);
     }
 
+    @GetMapping("/all-enrolled-courses")
+    public ResponseEntity<List<EnrollmentResponseDTO> >viewAllEnrolledCourses(){
+        List<EnrollmentResponseDTO> viewAllEnrollment = enrollmentService.viewAllEnrolledCourses();
+        return ResponseEntity.ok(viewAllEnrollment);
+    }
+
+
     @PostMapping("/submit-answer")
     public ResponseEntity<SubmissionResponseDTO>  submitAnswers(@RequestBody SubmissionRequestDTO submissionRequestDTO){
         SubmissionResponseDTO responseDTO = submissionService.submitAnswers(submissionRequestDTO);
@@ -38,7 +45,12 @@ public class StudentController {
     public ResponseEntity<SubmissionResponseDTO> viewSubmission(@PathVariable String assignmentId){
         SubmissionResponseDTO submissionResponse = submissionService.viewSubmission(assignmentId);
         return ResponseEntity.ok(submissionResponse);
+    }
 
+    @GetMapping("/all-submissions")
+    public ResponseEntity<List<SubmissionResponseDTO> >viewAllSubmission(){
+        List<SubmissionResponseDTO> viewAllSubmissionsRequest = submissionService.viewAllSubmissions();
+        return ResponseEntity.ok(viewAllSubmissionsRequest);
     }
 
     @GetMapping("/view-assignment/{assignmentId}")
@@ -47,16 +59,5 @@ public class StudentController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    @GetMapping("/all-enrolled-courses")
-    public ResponseEntity<List<EnrollmentResponseDTO> >viewAllEnrolledCourses(){
-        List<EnrollmentResponseDTO> viewAllCourses = enrollmentService.viewAllEnrolledCourses();
-        return ResponseEntity.ok(viewAllCourses);
-    }
-
-    @GetMapping("/all-enrolled-courses")
-    public ResponseEntity<List<SubmissionResponseDTO> >viewAllSubmission(){
-        List<SubmissionResponseDTO> viewAllSubmissionsRequest = submissionService.viewAllSubmissions();
-        return ResponseEntity.ok(viewAllSubmissionsRequest);
-    }
 }
 

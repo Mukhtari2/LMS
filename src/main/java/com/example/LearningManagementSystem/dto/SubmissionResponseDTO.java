@@ -1,8 +1,10 @@
 package com.example.LearningManagementSystem.dto;
 
 import com.example.LearningManagementSystem.Enum.Grade;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -20,12 +22,14 @@ public class SubmissionResponseDTO {
 
     private String fileUrl;
 
-    private LocalDateTime answeredAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d/M/yyyy")
+    private LocalDate answeredAt;
 
     private Grade grade;
 
     private String feedback;
 
-    private LocalDateTime submittedAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d/M/yyyy")
+    private LocalDate submittedAt;
 
 }

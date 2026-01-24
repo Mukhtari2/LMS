@@ -57,4 +57,10 @@ public class TeacherController {
         List<LessonResponseDTO> responseDTO = lessonService.viewAllLessons();
         return ResponseEntity.ok(responseDTO);
     }
+
+    @GetMapping("view-lesson/{courseId}")
+    public ResponseEntity<LessonResponseDTO> viewLessonByCourseId(@PathVariable String courseId){
+        LessonResponseDTO viewLessonRequest = lessonService.viewLesson(courseId);
+        return ResponseEntity.ok(viewLessonRequest);
+    }
 }

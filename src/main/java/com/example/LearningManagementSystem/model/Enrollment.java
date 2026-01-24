@@ -1,10 +1,12 @@
 package com.example.LearningManagementSystem.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
@@ -24,6 +26,7 @@ public class Enrollment {
 
     private Course courseId;
 
-    private Date enrolledAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d/M/yyyy")
+    private LocalDate enrolledAt;
 
 }

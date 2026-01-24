@@ -27,5 +27,4 @@ public class Course {
 
     private Status status;
 
-    private Role role;
 }
