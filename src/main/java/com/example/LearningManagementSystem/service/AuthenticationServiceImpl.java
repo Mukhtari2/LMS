@@ -27,28 +27,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse register(AuthenticationRequest request) {
+        Role assignedRole = (request.getRole() != null && request.getRole().equalsIgnoreCase("TEACHER"))
+                ? Role.TEACHER
+                : Role.STUDENT;
         User user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .roles(Role.TEACHER)
+                .roles(assignedRole)
                 .build();
         repository.insert(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-
-
-//        return Optional.of(request)
-//                .map(req -> User.builder()
-//                        .name(req.getName())
-//                        .email(req.getEmail())
-//                        .password(passwordEncoder.encode(req.getPassword()))
-//                        .build())
-//                .map(repository::insert)
-//                .map(userMapper::toDto)
-//                .orElseThrow();
 
     }
 
