@@ -1,6 +1,10 @@
 package com.example.LearningManagementSystem.model;
 
 import com.example.LearningManagementSystem.Enum.Role;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -24,19 +28,26 @@ public class User implements UserDetails {
     @Id
     private String id;
 
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
 
+    @NotBlank(message = "Email is required")
+    @Email(message = "Please provide a valid email address")
     @Indexed(unique = true)
     private String email;
 
+    @NotBlank(message = "Password is required")
+    @Size(min = 4, message = "Password must be at least 8 characters long")
     private String password;
 
-    private Role roles;
+    @NotNull(message = "Role is required")
+    private Role role;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + roles.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
     @Override

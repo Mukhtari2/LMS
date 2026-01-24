@@ -6,10 +6,8 @@ import com.example.LearningManagementSystem.authenticationAndAuthorization.Authe
 import com.example.LearningManagementSystem.authenticationAndAuthorization.JwtService;
 import com.example.LearningManagementSystem.model.User;
 import com.example.LearningManagementSystem.repository.UserRepository;
-import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -43,7 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .roles(assignedRole)
+                .role(assignedRole)
                 .build();
         repository.insert(user);
         var jwtToken = jwtService.generateToken(user);

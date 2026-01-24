@@ -1,10 +1,8 @@
 package com.example.LearningManagementSystem.dto;
-import com.example.LearningManagementSystem.model.Course;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Setter
 @Getter
@@ -13,7 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class AssignmentRequestDTO {
 
-    private String course;
+    private String courseId;
 
     private String title;
 

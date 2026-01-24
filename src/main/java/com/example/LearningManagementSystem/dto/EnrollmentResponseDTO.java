@@ -18,7 +18,7 @@ public class EnrollmentResponseDTO {
 
     private String studentId;
 
-    private Course courseId;
+    private String courseId;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d/M/yyyy")
     private LocalDate enrolledAt;

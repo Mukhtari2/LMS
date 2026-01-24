@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {LocalDate.class})
 public interface AssignmentMapper {
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "course", source = "course")
+    @Mapping(target = "courseId", source = "course.id")
     @Mapping(target = "title", source = "requestDTO.title")
     @Mapping(target = "description", source = "requestDTO.description")
     Assignment toEntity(AssignmentRequestDTO requestDTO, Course course);

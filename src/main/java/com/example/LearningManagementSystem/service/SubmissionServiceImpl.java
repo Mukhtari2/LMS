@@ -35,7 +35,7 @@ public class SubmissionServiceImpl implements SubmissionService{
 //            return submissionMapper.toDto(newSubmission);
 
         return Optional.ofNullable(assignmentService.findByAssignmentId(requestDTO.getAssignmentId()))
-                .map(assignment -> submissionMapper.toEntity(requestDTO, assignment))
+                .map(assignmentId -> submissionMapper.toEntity(requestDTO, assignmentId))
                 .map(submissionRepository::insert)
                 .map(submissionMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("No assignment Id found for this submission"));

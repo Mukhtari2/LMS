@@ -27,7 +27,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     @Override
     public EnrollmentResponseDTO enrollPublishedCourse(EnrollmentRequestDTO request) {
         return Optional.ofNullable(courseService.findByCourseId(request.getCourseId()))
-                .map(course -> enrollmentMapper.toEntity(request, course))
+                .map(courseId -> enrollmentMapper.toEntity(request, courseId))
                 .map(enrollmentRepository::insert)
                 .map(enrollmentMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("Course with ID " + request.getCourseId()));

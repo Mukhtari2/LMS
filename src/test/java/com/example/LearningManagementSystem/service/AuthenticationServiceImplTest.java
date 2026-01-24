@@ -56,7 +56,7 @@ class AuthenticationServiceImplTest {
                 .name("Musa")
                 .email("musa@gmail.com")
                 .password(passwordEncoder.encode(plainPassword))
-                .roles(Role.TEACHER)
+                .role(Role.TEACHER)
                 .build();
         userRepository.save(userEntity);
 

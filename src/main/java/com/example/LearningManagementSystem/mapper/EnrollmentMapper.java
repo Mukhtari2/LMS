@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {LocalDate.class})
 public interface EnrollmentMapper {
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "courseId", source = "course")
+    @Mapping(target = "courseId", source = "course.id")
     @Mapping(target = "studentId", source = "request.studentId")
     @Mapping(target = "enrolledAt", expression = "java(LocalDate.now())")
 

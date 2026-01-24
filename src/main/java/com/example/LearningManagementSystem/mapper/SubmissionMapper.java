@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {LocalDate.class})
 public interface SubmissionMapper {
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "assignment", source = "assignment")
+    @Mapping(target = "assignment", source = "assignment.id")
     @Mapping(target = "studentId", source = "requestDTO.studentId")
     @Mapping(target = "answeredAt", source = "requestDTO.answeredAt")
     @Mapping(target = "fileUrl", source = "requestDTO.fileUrl")
@@ -24,7 +24,7 @@ public interface SubmissionMapper {
     @Mapping(target = "feedback", source = "requestDTO.feedback")
 
     Submission toEntity(SubmissionRequestDTO requestDTO, Assignment assignment);
-    @Mapping(target = "assignmentId", source = "assignment.id")
+
     SubmissionResponseDTO toDto(Submission submission);
 
     default Grade mapGrade(int gradeValue) {

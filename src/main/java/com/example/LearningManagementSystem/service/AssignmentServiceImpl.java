@@ -7,7 +7,6 @@ import com.example.LearningManagementSystem.mapper.AssignmentMapper;
 import com.example.LearningManagementSystem.model.Assignment;
 import com.example.LearningManagementSystem.repository.AssignmentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -32,8 +31,8 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public AssignmentResponseDTO createAssignment(AssignmentRequestDTO requestDTO) {
-        return Optional.ofNullable(courseService.findByCourseId(requestDTO.getCourse()))
-                .map(course -> assignmentMapper.toEntity(requestDTO, course))
+        return Optional.ofNullable(courseService.findByCourseId(requestDTO.getCourseId()))
+                .map(courseId -> assignmentMapper.toEntity(requestDTO, courseId))
                 .map(assignmentRepository::insert)
                 .map(assignmentMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("No course id found to view assignment"));
