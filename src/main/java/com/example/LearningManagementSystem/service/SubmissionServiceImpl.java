@@ -54,7 +54,7 @@ public class SubmissionServiceImpl implements SubmissionService{
 
 
     @Override
-    public List<SubmissionResponseDTO> viewAllSubmission() {
+    public List<SubmissionResponseDTO> viewAllSubmissions() {
             return submissionRepository.findAll()
                     .stream()
                     .map(submissionMapper::toDto)

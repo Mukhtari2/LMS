@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/student")
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class StudentController {
     }
 
     @PostMapping("/submit-answer")
-    public ResponseEntity<SubmissionResponseDTO>  submitAnswer(@RequestBody SubmissionRequestDTO submissionRequestDTO){
+    public ResponseEntity<SubmissionResponseDTO>  submitAnswers(@RequestBody SubmissionRequestDTO submissionRequestDTO){
         SubmissionResponseDTO responseDTO = submissionService.submitAnswers(submissionRequestDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
@@ -45,5 +47,15 @@ public class StudentController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    @GetMapping("/all-enrolled-courses")
+    public ResponseEntity<List<EnrollmentResponseDTO> >viewAllEnrolledCourses(){
+        List<EnrollmentResponseDTO> viewAllCourses = enrollmentService.viewAllEnrolledCourses();
+        return ResponseEntity.ok(viewAllCourses);
+    }
 
+    @GetMapping("/all-enrolled-courses")
+    public ResponseEntity<List<EnrollmentResponseDTO> >viewAllEnrolledCourses(){
+        List<EnrollmentResponseDTO> viewAllCourses = enrollmentService.viewAllEnrolledCourses();
+        return ResponseEntity.ok(viewAllCourses);
+    }
 }

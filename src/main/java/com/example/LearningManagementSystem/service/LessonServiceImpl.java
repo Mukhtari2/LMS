@@ -10,6 +10,7 @@ import com.example.LearningManagementSystem.repository.LessonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -44,6 +45,11 @@ public class LessonServiceImpl implements LessonService{
         Lesson lesson = lessonRepository.findByCourseId(courseId).orElseThrow(() -> new ResourceNotFoundException
                 ("No lesson found with id " + courseId));
         return lessonMapper.toDto(lesson);
+    }
+
+    @Override
+    public List<LessonResponseDTO> viewAllLessons (){
+        return lessonRepository.findAll().stream().map(lessonMapper::toDto).toList();
     }
 
 }

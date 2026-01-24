@@ -4,6 +4,7 @@ import com.example.LearningManagementSystem.Enum.Role;
 import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
 import com.example.LearningManagementSystem.dto.CourseRequestDTO;
 import com.example.LearningManagementSystem.dto.CourseResponseDTO;
+import com.example.LearningManagementSystem.dto.EnrollmentResponseDTO;
 import com.example.LearningManagementSystem.mapper.CourseMapper;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.CourseRepository;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,5 +46,10 @@ public class CourseServiceImpl implements CourseService{
            courseMapper.updateEntityFromDto(requestDTO, existingCourse);
            Course updatedCourse = courseRepository.save(existingCourse);
            return courseMapper.toDto(updatedCourse);
+    }
+
+    @Override
+    public List<CourseResponseDTO> viewAllCreatedCourses() {
+        return courseRepository.findAll().stream().map(courseMapper::toDto).toList();
     }
 }

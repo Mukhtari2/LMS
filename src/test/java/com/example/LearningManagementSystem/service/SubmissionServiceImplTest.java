@@ -1,8 +1,6 @@
 package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Enum.Grade;
-import com.example.LearningManagementSystem.dto.AssignmentRequestDTO;
-import com.example.LearningManagementSystem.dto.AssignmentResponseDTO;
 import com.example.LearningManagementSystem.dto.SubmissionRequestDTO;
 import com.example.LearningManagementSystem.dto.SubmissionResponseDTO;
 import com.example.LearningManagementSystem.model.Assignment;
@@ -12,14 +10,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
-import static com.example.LearningManagementSystem.Enum.Grade.FAIL;
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("test")
@@ -39,7 +34,6 @@ class SubmissionServiceImplTest {
 
     @BeforeEach
     void setUp() {
-
         submissionRepository.deleteAll();
         assignmentRepository.deleteAll();
     }
@@ -88,7 +82,7 @@ class SubmissionServiceImplTest {
     }
 
     @Test
-    void viewAllSubmission() {
+    void viewAllSubmissions() {
         String assignmentId = "GEL224";
         Assignment assignment = new Assignment();
         assignment.setId(assignmentId);
@@ -115,7 +109,7 @@ class SubmissionServiceImplTest {
         request2.setFeedback("Very Poor");
         submissionService.submitAnswers(request2);
 
-        List<SubmissionResponseDTO> submissions = submissionService.viewAllSubmission();
+        List<SubmissionResponseDTO> submissions = submissionService.viewAllSubmissions();
 
         assertNotNull(submissions);
         assertEquals(2, submissions.size());

@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/teacher")
 @PreAuthorize("hasRole('TEACHER')")
@@ -42,5 +44,17 @@ public class TeacherController {
     public ResponseEntity<AssignmentResponseDTO> createAssignment (@RequestBody AssignmentRequestDTO assignmentRequestDTO) {
         AssignmentResponseDTO responseDTO = assignmentService.createAssignment(assignmentRequestDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all-courses")
+    public ResponseEntity<List<CourseResponseDTO>> viewAllCourses () {
+        List<CourseResponseDTO> responseDTO = courseService.viewAllCreatedCourses();
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @GetMapping("/all-lessons")
+    public ResponseEntity<List<LessonResponseDTO>> viewAllLessons () {
+        List<LessonResponseDTO> responseDTO = lessonService.viewAllLessons();
+        return ResponseEntity.ok(responseDTO);
     }
 }

@@ -27,7 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse register(AuthenticationRequest request) {
-        Role assignedRole = (request.getRole() != null && request.getRole().equalsIgnoreCase("TEACHER"))
+        Role assignedRole = (request.getRole() != null && request.getRole().equals("TEACHER"))
                 ? Role.TEACHER
                 : Role.STUDENT;
         User user = User.builder()
