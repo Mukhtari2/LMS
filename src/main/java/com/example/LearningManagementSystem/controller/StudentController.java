@@ -54,8 +54,9 @@ public class StudentController {
     }
 
     @GetMapping("/all-enrolled-courses")
-    public ResponseEntity<List<EnrollmentResponseDTO> >viewAllEnrolledCourses(){
-        List<EnrollmentResponseDTO> viewAllCourses = enrollmentService.viewAllEnrolledCourses();
-        return ResponseEntity.ok(viewAllCourses);
+    public ResponseEntity<List<SubmissionResponseDTO> >viewAllSubmission(){
+        List<SubmissionResponseDTO> viewAllSubmissionsRequest = submissionService.viewAllSubmissions();
+        return ResponseEntity.ok(viewAllSubmissionsRequest);
     }
 }
+
