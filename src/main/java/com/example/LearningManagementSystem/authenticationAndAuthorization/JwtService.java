@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "9aeaed1adbae26f47457f721667bbf60598377f29912c20f71603b1a9010dfca";
+    private static final String SECRET_KEY = "cbc927c9dba3ea06744312d6754a1f43211cd1bd4659b8317db7d22a0f5a37ce";
 
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
@@ -68,8 +69,11 @@ public class JwtService {
     }
 
     private SecretKey getSecreteKey() {
-        byte [] decodedKey = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(decodedKey);
+//        byte [] decodedKey = Decoders.BASE64.decode(SECRET_KEY);
+//        return Keys.hmacShaKeyFor(decodedKey);
+
+        byte[] keyBytes = SECRET_KEY.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 }
 
