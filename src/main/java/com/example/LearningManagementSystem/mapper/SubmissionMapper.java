@@ -9,16 +9,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {LocalDateTime.class})
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {LocalDate.class})
 public interface SubmissionMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "assignment", source = "assignment")
     @Mapping(target = "studentId", source = "requestDTO.studentId")
     @Mapping(target = "answeredAt", source = "requestDTO.answeredAt")
     @Mapping(target = "fileUrl", source = "requestDTO.fileUrl")
-    @Mapping(target = "submittedAt", expression = "java(LocalDateTime.now())")
+    @Mapping(target = "submittedAt", expression = "java(LocalDate.now())")
     @Mapping(target = "grade", source = "requestDTO.grade")
     @Mapping(target = "feedback", source = "requestDTO.feedback")
 

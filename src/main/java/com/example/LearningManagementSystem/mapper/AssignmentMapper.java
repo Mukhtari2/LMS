@@ -8,7 +8,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {java.util.Date.class})
+import java.time.LocalDate;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {LocalDate.class})
 public interface AssignmentMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "course", source = "course")

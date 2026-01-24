@@ -29,7 +29,6 @@ public class CourseServiceImpl implements CourseService{
                 .description(requestDTO.getDescription())
                 .title(requestDTO.getTitle())
                 .teacherId(requestDTO.getTeacherId())
-                .role(Role.TEACHER)
                 .build();
         Course newCourse = courseRepository.insert(course);
         return courseMapper.toDto(newCourse);

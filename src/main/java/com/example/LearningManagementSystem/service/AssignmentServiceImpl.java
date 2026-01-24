@@ -32,7 +32,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public AssignmentResponseDTO createAssignment(AssignmentRequestDTO requestDTO) {
-        return Optional.ofNullable(courseService.findByCourseId(requestDTO.getCourseId()))
+        return Optional.ofNullable(courseService.findByCourseId(requestDTO.getCourse()))
                 .map(course -> assignmentMapper.toEntity(requestDTO, course))
                 .map(assignmentRepository::insert)
                 .map(assignmentMapper::toDto)
