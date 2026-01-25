@@ -51,6 +51,7 @@ class AssignmentServiceImplTest {
                 .build();
         AssignmentResponseDTO responseDTO = assignmentService.createAssignment(assignment);
         assertNotNull(responseDTO);
+        assertEquals("physical health education", responseDTO.getDescription());
     }
 
     @Test
