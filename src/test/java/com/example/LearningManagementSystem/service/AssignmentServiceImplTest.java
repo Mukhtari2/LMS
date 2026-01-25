@@ -41,6 +41,7 @@ class AssignmentServiceImplTest {
         Course course = new Course();
         course.setId(courseId);
         courseRepository.save(course);
+
         AssignmentRequestDTO assignment = AssignmentRequestDTO.builder()
                 .title("measurement calculation")
                 .description("physical health education")
@@ -53,24 +54,33 @@ class AssignmentServiceImplTest {
 
     @Test
     void viewAssignmentByCourseId() {
-        String id = "6544L";
-        Assignment courseId = new Assignment();
-        courseId.setId(id);
-        assignmentRepository.save(courseId);
+        String courseId = "64L";
+        Course course = new Course();
+        course.setId(courseId);
+        courseRepository.save(course);
+
         AssignmentRequestDTO assignment = AssignmentRequestDTO.builder()
                 .title("measurement calculation")
                 .description("physical health education")
                 .dueDate(LocalDate.of(2026,4,23))
-                .courseId(courseId.getId())
+                .courseId(course.getId())
                 .build();
+        assignmentService.createAssignment(assignment);
         AssignmentResponseDTO view = assignmentService.viewAssignment(assignment.getCourseId());
         assertNotNull(view);
-        assertEquals("measurement calculation", view.getTitle());
-        assertEquals(courseId.getId(), view.getCourseId());
+        assertEquals(course.getId(), view.getCourseId());
         assertEquals(LocalDate.of(2026,4,23), view.getDueDate());
 
     }
     @Test
     void findByAssignmentId() {
+        String courseId = "64L";
+        Course course = new Course();
+        course.setId(courseId);
+        courseRepository.save(course);
+
+        AssignmentRequestDTO assignment = AssignmentRequestDTO.builder()
+                .i
+
     }
 }

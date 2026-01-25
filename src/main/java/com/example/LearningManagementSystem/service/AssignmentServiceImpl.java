@@ -22,11 +22,10 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public AssignmentResponseDTO viewAssignment(String courseId) {
-        Assignment assignment = assignmentRepository.findById(courseId)
+       return assignmentRepository.findByCourseId(courseId)
+                .map(assignmentMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException
                         ("Assignment with ID " + courseId + " not found "));
-
-        return assignmentMapper.toDto(assignment);
     }
 
     @Override
@@ -38,10 +37,5 @@ public class AssignmentServiceImpl implements AssignmentService {
                 .orElseThrow(() -> new ResourceNotFoundException("No course id found to view assignment"));
     }
 
-
-    @Override
-    public Assignment findByAssignmentId(String assignmentId) {
-        return assignmentRepository.findById(assignmentId).orElseThrow();
-    }
 
 }

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface AssignmentRepository extends MongoRepository<Assignment, String> {
-    Optional<Assignment> findById(String assignmentId);
+    Optional<Assignment> findByCourseId(String courseId);
 }
