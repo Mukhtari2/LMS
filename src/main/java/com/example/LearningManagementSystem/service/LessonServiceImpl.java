@@ -25,14 +25,6 @@ public class LessonServiceImpl implements LessonService{
 
     @Override
     public LessonResponseDTO addLesson(LessonRequestDTO request) {
-//        Course course = courseService.findByCourseId(request.getCourseId());
-//        if (course != null) {
-//            Lesson newLesson = lessonMapper.toEntity(request, course);
-//            Lesson savedLesson = repository.insert(newLesson);
-//            return lessonMapper.toDto(savedLesson);
-//        }else throw new ResourceNotFoundException("No course Id available for adding lessson");
-
-
         return Optional.ofNullable(courseService.findByCourseId(request.getCourseId()))
                 .map(course -> lessonMapper.toEntity(request, course))
                 .map(lessonRepository::insert)

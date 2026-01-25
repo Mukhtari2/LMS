@@ -34,7 +34,6 @@ public class StudentController {
         return ResponseEntity.ok(viewAllEnrollment);
     }
 
-
     @PostMapping("/submit-answer")
     public ResponseEntity<SubmissionResponseDTO>  submitAnswers(@RequestBody SubmissionRequestDTO submissionRequestDTO){
         SubmissionResponseDTO responseDTO = submissionService.submitAnswers(submissionRequestDTO);

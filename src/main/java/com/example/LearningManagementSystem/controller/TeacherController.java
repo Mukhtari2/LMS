@@ -34,22 +34,16 @@ public class TeacherController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    @PostMapping("/addLesson")
-    public ResponseEntity<LessonResponseDTO> addLesson (LessonRequestDTO lessonRequestDTO){
-        LessonResponseDTO newLesson = lessonService.addLesson(lessonRequestDTO);
-        return new ResponseEntity<>(newLesson, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/create-Assignment")
-    public ResponseEntity<AssignmentResponseDTO> createAssignment (@RequestBody AssignmentRequestDTO assignmentRequestDTO) {
-        AssignmentResponseDTO responseDTO = assignmentService.createAssignment(assignmentRequestDTO);
-        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
-    }
-
     @GetMapping("/all-courses")
     public ResponseEntity<List<CourseResponseDTO>> viewAllCourses () {
         List<CourseResponseDTO> responseDTO = courseService.viewAllCreatedCourses();
         return ResponseEntity.ok(responseDTO);
+    }
+
+    @PostMapping("/addLesson")
+    public ResponseEntity<LessonResponseDTO> addLesson (LessonRequestDTO lessonRequestDTO){
+        LessonResponseDTO newLesson = lessonService.addLesson(lessonRequestDTO);
+        return new ResponseEntity<>(newLesson, HttpStatus.CREATED);
     }
 
     @GetMapping("/all-lessons")
@@ -62,5 +56,11 @@ public class TeacherController {
     public ResponseEntity<LessonResponseDTO> viewLessonByCourseId(@PathVariable String courseId){
         LessonResponseDTO viewLessonRequest = lessonService.viewLesson(courseId);
         return ResponseEntity.ok(viewLessonRequest);
+    }
+
+    @PostMapping("/create-Assignment")
+    public ResponseEntity<AssignmentResponseDTO> createAssignment (@RequestBody AssignmentRequestDTO assignmentRequestDTO) {
+        AssignmentResponseDTO responseDTO = assignmentService.createAssignment(assignmentRequestDTO);
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 }

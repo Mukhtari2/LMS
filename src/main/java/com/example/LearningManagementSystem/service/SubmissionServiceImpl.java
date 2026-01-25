@@ -23,17 +23,8 @@ public class SubmissionServiceImpl implements SubmissionService{
     private final SubmissionRepository submissionRepository;
     private final SubmissionMapper submissionMapper;
 
-
     @Override
     public SubmissionResponseDTO submitAnswers(SubmissionRequestDTO requestDTO) {
-//        Assignment assignment = assignmentService.findByAssignmentId(requestDTO.getAssignmentId());
-//        if (assignment == null) {
-//            throw new ResourceNotFoundException("No assignment Id found for this submission");
-//        }
-//            Submission submission = submissionMapper.toEntity(requestDTO, assignment);
-//            Submission newSubmission = submissionRepository.insert(submission);
-//            return submissionMapper.toDto(newSubmission);
-
         return Optional.ofNullable(assignmentService.findByAssignmentId(requestDTO.getAssignmentId()))
                 .map(assignmentId -> submissionMapper.toEntity(requestDTO, assignmentId))
                 .map(submissionRepository::insert)
@@ -41,17 +32,13 @@ public class SubmissionServiceImpl implements SubmissionService{
                 .orElseThrow(() -> new ResourceNotFoundException("No assignment Id found for this submission"));
     }
 
-
     @Override
     public SubmissionResponseDTO viewSubmission(String submissionId) {
         Submission id = submissionRepository.findById(submissionId).orElseThrow
                 (() -> new ResourceNotFoundException
                         ("Assignment with ID " + submissionId + " not found "));
-
         return submissionMapper.toDto(id);
     }
-
-
 
     @Override
     public List<SubmissionResponseDTO> viewAllSubmissions() {
