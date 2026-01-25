@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -74,13 +75,16 @@ class AssignmentServiceImplTest {
     }
     @Test
     void findByAssignmentId() {
-        String courseId = "64L";
-        Course course = new Course();
-        course.setId(courseId);
-        courseRepository.save(course);
+        String assignmentId = "64L";
+        Assignment assignment = Assignment.builder()
+                .id(assignmentId)
+                .courseId("21L")
+                .title("Optics and Sciences")
+                .build();
+        assignmentRepository.save(assignment);
 
-        AssignmentRequestDTO assignment = AssignmentRequestDTO.builder()
-                .i
+        Assignment findAssignment = assignmentService.findByAssignmentId(assignment.getId());
+        assertNotNull(findAssignment);
 
     }
 }

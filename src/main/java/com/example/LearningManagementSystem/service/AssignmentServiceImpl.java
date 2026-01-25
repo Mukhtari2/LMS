@@ -38,4 +38,9 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
 
+    @Override
+    public Assignment findByAssignmentId(String assignmentId) {
+        return assignmentRepository.findById(assignmentId).orElseThrow();
+    }
+
 }
