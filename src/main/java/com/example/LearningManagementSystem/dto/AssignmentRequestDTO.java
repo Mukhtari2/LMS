@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
+@Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class AssignmentRequestDTO {

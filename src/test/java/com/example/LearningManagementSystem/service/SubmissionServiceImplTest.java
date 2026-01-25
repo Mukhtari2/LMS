@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -39,7 +40,7 @@ class SubmissionServiceImplTest {
     }
 
     @Test
-    void submitAnswers() {
+    void toSubmitAnswers() {
         String assignmentId = "1234LM";
         Assignment assignment = new Assignment();
         assignment.setId(assignmentId);
@@ -47,7 +48,7 @@ class SubmissionServiceImplTest {
 
         SubmissionRequestDTO request = new SubmissionRequestDTO();
         request.setAssignmentId(assignmentId);
-        request.setAnsweredAt(LocalDateTime.now());
+        request.setAnsweredAt(LocalDate.now());
         request.setStudentId("1222/2/111PL");
         request.setGrade(22);
         request.setFeedback("Very Poor");
@@ -66,7 +67,7 @@ class SubmissionServiceImplTest {
 
         SubmissionRequestDTO request = new SubmissionRequestDTO();
         request.setAssignmentId(assignmentId);
-        request.setAnsweredAt(LocalDateTime.now());
+        request.setAnsweredAt(LocalDate.now());
         request.setStudentId("4482/MN");
         request.setGrade(22);
         request.setFeedback("Very Poor");
@@ -95,7 +96,7 @@ class SubmissionServiceImplTest {
 
         SubmissionRequestDTO request = new SubmissionRequestDTO();
         request.setAssignmentId(assignmentId);
-        request.setAnsweredAt(LocalDateTime.now());
+        request.setAnsweredAt(LocalDate.now());
         request.setStudentId("4482/MN");
         request.setGrade(22);
         request.setFeedback("Very Poor");
@@ -103,7 +104,7 @@ class SubmissionServiceImplTest {
 
         SubmissionRequestDTO request2 = new SubmissionRequestDTO();
         request2.setAssignmentId(assignmentId2);
-        request2.setAnsweredAt(LocalDateTime.now());
+        request2.setAnsweredAt(LocalDate.now());
         request2.setStudentId("4482/MN");
         request2.setGrade(22);
         request2.setFeedback("Very Poor");

@@ -57,8 +57,8 @@ class EnrollmentServiceImplTest {
         EnrollmentResponseDTO response = enrollmentService.enrollPublishedCourse(request);
 
         assertNotNull(response);
-        assertEquals(courseId, response.getCourseId().getId());
-        assertEquals("Advanced Petroleum Geology", response.getCourseId().getTitle());
+        assertEquals(courseId, response.getCourseId());
+        assertEquals("Advanced Petroleum Geology", newCourse.getTitle());
         assertEquals("2015/1/57125PL", response.getStudentId());
 
 
@@ -74,7 +74,6 @@ class EnrollmentServiceImplTest {
         courseA.setTitle("Advanced HydroGeology");
         courseA.setTeacherId("65NA");
         courseA.setStatus(Status.DRAFT);
-        courseA.setRole(Role.STUDENT);
         Course course1 = courseRepository.save(courseA);
 
         String courseId2 = "GEL312";
@@ -83,7 +82,6 @@ class EnrollmentServiceImplTest {
         courseB.setTitle("Advanced HydroGeology");
         courseB.setTeacherId("65NA");
         courseB.setStatus(Status.DRAFT);
-        courseB.setRole(Role.STUDENT);
         Course course2 = courseRepository.save(courseB);
 
         EnrollmentRequestDTO enrollmentRequest = new EnrollmentRequestDTO();

@@ -75,4 +75,9 @@ class LessonServiceImplTest {
         LessonResponseDTO savedLessons = lessonService.viewLesson(lesson1.getCourseId());
         assertNotNull(savedLessons);
     }
+
+    @Test
+    void toViewAllLessons(){
+
+    }
 }
