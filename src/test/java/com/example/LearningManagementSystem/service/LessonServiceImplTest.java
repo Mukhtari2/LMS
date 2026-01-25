@@ -78,6 +78,32 @@ class LessonServiceImplTest {
 
     @Test
     void toViewAllLessons(){
+        String courseId = "GEL412";
+        Course course = new Course();
+        course.setId(courseId);
+        courseRepository.save(course);
 
+        LessonRequestDTO lesson1 = new LessonRequestDTO();
+        lesson1.setCourseId(courseId);
+        lesson1.setTitle("Hydrology");
+        lesson1.setContentUrl("https://www.geoworldd.com");
+        lessonService.addLesson(lesson1);
+
+        String courseId2 = "CRS-101";
+        Course course2 = new Course();
+        course2.setId(courseId2);
+        courseRepository.save(course2);
+
+        LessonRequestDTO lesson2 = new LessonRequestDTO();
+        lesson2.setCourseId(courseId2);
+        lesson2.setTitle("Hydrology");
+        lesson2.setContentUrl("https://www.geoworldd.com");
+        lessonService.addLesson(lesson2);
+
+        List<LessonResponseDTO> viewAll = lessonService.viewAllLessons();
+
+        assertNotNull(viewAll);
+        assertEquals(2, viewAll.size());
+        assertEquals("Hydrology", lesson2.getTitle());
     }
 }
