@@ -84,7 +84,5 @@ class AuthenticationServiceImplTest {
         authenticationService.removeUser(user.getId());
         assertNotNull(user);
         assertEquals("23L", user.getId());
-
-
     }
 }
