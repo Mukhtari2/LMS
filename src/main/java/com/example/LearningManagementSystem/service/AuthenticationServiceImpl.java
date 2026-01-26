@@ -1,6 +1,7 @@
 package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Enum.Role;
+import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationRequest;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationResponse;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.JwtService;
@@ -8,6 +9,7 @@ import com.example.LearningManagementSystem.model.User;
 import com.example.LearningManagementSystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,10 +20,11 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Lazy
-    private final UserRepository repository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
 
     @Override
     public AuthenticationResponse register(AuthenticationRequest request) {
@@ -43,12 +46,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(assignedRole)
                 .build();
-        repository.insert(user);
+        userRepository.insert(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-
     }
 
     @Override
@@ -59,11 +61,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         request.getPassword()
                 )
         );
-        var user = repository.findByEmail(request.getEmail())
+        var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
+
+    @Override
+    public void removeUser(String userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new ResourceNotFoundException("User with id " + userId + " not found");
+        }
+        userRepository.deleteById(userId);
+    }
+
 }

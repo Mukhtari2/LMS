@@ -7,4 +7,5 @@ public interface AuthenticationService {
     AuthenticationResponse register(AuthenticationRequest request);
 
     AuthenticationResponse authenticate (AuthenticationRequest request);
+    void removeUser (String userId);
 }

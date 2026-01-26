@@ -68,6 +68,24 @@ class AuthenticationServiceImplTest {
         assertNotNull(response);
         assertNotNull(response.getToken());
         assertFalse(response.getToken().isEmpty());
+    }
+
+    @Test
+    void toDeleteUser(){
+        String password = "1111";
+        User user = new User();
+        user.setId("23L");
+        user.setEmail("HashimSalih2@gmail.com");
+        user.setRole(Role.STUDENT);
+        user.setPassword(password);
+        user.setName("Lookman");
+        userRepository.save(user);
+
+        authenticationService.removeUser(user.getId());
+
+        assertNotNull(user);
+        assertEquals("23L", user.getId());
+
 
     }
 }

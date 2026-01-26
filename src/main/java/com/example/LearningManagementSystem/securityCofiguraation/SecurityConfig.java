@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**", "/error").permitAll()
+                        .requestMatchers("/api/v1/auth/remove-User").hasRole("ADMIN")
                         .requestMatchers("/api/v1/teacher/**").hasRole("TEACHER")
                         .requestMatchers("/api/v1/student/**").hasRole("STUDENT")
                         .anyRequest().authenticated()
