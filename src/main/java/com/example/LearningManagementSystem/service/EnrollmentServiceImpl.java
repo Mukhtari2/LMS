@@ -1,14 +1,11 @@
 package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
-import com.example.LearningManagementSystem.dto.EnrollmentRequestDTO;
-import com.example.LearningManagementSystem.dto.EnrollmentResponseDTO;
+import com.example.LearningManagementSystem.dto.EnrollmentRequestDto;
+import com.example.LearningManagementSystem.dto.EnrollmentResponseDto;
 import com.example.LearningManagementSystem.mapper.EnrollmentMapper;
-import com.example.LearningManagementSystem.model.Course;
-import com.example.LearningManagementSystem.model.Enrollment;
 import com.example.LearningManagementSystem.repository.EnrollmentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 
@@ -25,7 +22,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
 
     @Override
-    public EnrollmentResponseDTO enrollPublishedCourse(EnrollmentRequestDTO request) {
+    public EnrollmentResponseDto enrollPublishedCourse(EnrollmentRequestDto request) {
         return Optional.ofNullable(courseService.findByCourseId(request.getCourseId()))
                 .map(courseId -> enrollmentMapper.toEntity(request, courseId))
                 .map(enrollmentRepository::insert)
@@ -34,7 +31,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public List<EnrollmentResponseDTO> viewAllEnrolledCourses() {
+    public List<EnrollmentResponseDto> viewAllEnrolledCourses() {
      return enrollmentRepository.findAll().stream().map(enrollmentMapper::toDto).toList();
     }
 }

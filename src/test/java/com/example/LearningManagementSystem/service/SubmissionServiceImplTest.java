@@ -1,8 +1,8 @@
 package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Enum.Grade;
-import com.example.LearningManagementSystem.dto.SubmissionRequestDTO;
-import com.example.LearningManagementSystem.dto.SubmissionResponseDTO;
+import com.example.LearningManagementSystem.dto.SubmissionRequestDto;
+import com.example.LearningManagementSystem.dto.SubmissionResponseDto;
 import com.example.LearningManagementSystem.model.Assignment;
 import com.example.LearningManagementSystem.repository.AssignmentRepository;
 import com.example.LearningManagementSystem.repository.SubmissionRepository;
@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,14 +45,14 @@ class SubmissionServiceImplTest {
         assignment.setId(assignmentId);
         assignmentRepository.save(assignment);
 
-        SubmissionRequestDTO request = new SubmissionRequestDTO();
+        SubmissionRequestDto request = new SubmissionRequestDto();
         request.setAssignmentId(assignmentId);
         request.setAnsweredAt(LocalDate.now());
         request.setStudentId("1222/2/111PL");
         request.setGrade(22);
         request.setFeedback("Very Poor");
 
-        SubmissionResponseDTO newSubmission = submissionService.submitAnswers(request);
+        SubmissionResponseDto newSubmission = submissionService.submitAnswers(request);
         assertNotNull(newSubmission);
         assertEquals(Grade.FAIL, newSubmission.getGrade());
     }
@@ -65,16 +64,16 @@ class SubmissionServiceImplTest {
         assignment.setId(assignmentId);
         assignmentRepository.save(assignment);
 
-        SubmissionRequestDTO request = new SubmissionRequestDTO();
+        SubmissionRequestDto request = new SubmissionRequestDto();
         request.setAssignmentId(assignmentId);
         request.setAnsweredAt(LocalDate.now());
         request.setStudentId("4482/MN");
         request.setGrade(22);
         request.setFeedback("Very Poor");
 
-        SubmissionResponseDTO saved = submissionService.submitAnswers(request);
+        SubmissionResponseDto saved = submissionService.submitAnswers(request);
 
-        SubmissionResponseDTO result = submissionService.viewSubmission(saved.getId());
+        SubmissionResponseDto result = submissionService.viewSubmission(saved.getId());
 
         assertNotNull(result);
         assertEquals(saved.getId(), result.getId());
@@ -94,7 +93,7 @@ class SubmissionServiceImplTest {
         assignment2.setId(assignmentId2);
         assignmentRepository.save(assignment2);
 
-        SubmissionRequestDTO request = new SubmissionRequestDTO();
+        SubmissionRequestDto request = new SubmissionRequestDto();
         request.setAssignmentId(assignmentId);
         request.setAnsweredAt(LocalDate.now());
         request.setStudentId("4482/MN");
@@ -102,7 +101,7 @@ class SubmissionServiceImplTest {
         request.setFeedback("Very Poor");
         submissionService.submitAnswers(request);
 
-        SubmissionRequestDTO request2 = new SubmissionRequestDTO();
+        SubmissionRequestDto request2 = new SubmissionRequestDto();
         request2.setAssignmentId(assignmentId2);
         request2.setAnsweredAt(LocalDate.now());
         request2.setStudentId("4482/MN");
@@ -110,7 +109,7 @@ class SubmissionServiceImplTest {
         request2.setFeedback("Very Poor");
         submissionService.submitAnswers(request2);
 
-        List<SubmissionResponseDTO> submissions = submissionService.viewAllSubmissions();
+        List<SubmissionResponseDto> submissions = submissionService.viewAllSubmissions();
 
         assertNotNull(submissions);
         assertEquals(2, submissions.size());

@@ -1,13 +1,11 @@
 package com.example.LearningManagementSystem.authenticationAndAuthorization;
 
 import com.example.LearningManagementSystem.Enum.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@Builder
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationRequest {

@@ -6,6 +6,6 @@ import com.example.LearningManagementSystem.authenticationAndAuthorization.Authe
 public interface AuthenticationService {
     AuthenticationResponse register(AuthenticationRequest request);
 
-    AuthenticationResponse authenticate (AuthenticationRequest request);
-    void removeUser (String userId);
+    AuthenticationResponse login(AuthenticationRequest request);
+
 }

@@ -1,12 +1,11 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.dto.EnrollmentRequestDTO;
-import com.example.LearningManagementSystem.dto.EnrollmentResponseDTO;
-import com.example.LearningManagementSystem.model.Enrollment;
+import com.example.LearningManagementSystem.dto.EnrollmentRequestDto;
+import com.example.LearningManagementSystem.dto.EnrollmentResponseDto;
 
 import java.util.List;
 
 public interface EnrollmentService {
-    EnrollmentResponseDTO enrollPublishedCourse(EnrollmentRequestDTO request);
-    List<EnrollmentResponseDTO> viewAllEnrolledCourses();
+    EnrollmentResponseDto enrollPublishedCourse(EnrollmentRequestDto request);
+    List<EnrollmentResponseDto> viewAllEnrolledCourses();
 }

@@ -50,7 +50,7 @@ class AuthenticationServiceImplTest {
     }
 
     @Test
-    void toAuthenticateUser() {
+    void toLoginUser() {
         String plainPassword = "password123";
         User userEntity = User.builder()
                 .name("Musa")
@@ -64,7 +64,7 @@ class AuthenticationServiceImplTest {
         authRequest.setEmail("musa@gmail.com");
         authRequest.setPassword(plainPassword);
 
-        AuthenticationResponse response = authenticationService.authenticate(authRequest);
+        AuthenticationResponse response = authenticationService.login(authRequest);
         assertNotNull(response);
         assertNotNull(response.getToken());
         assertFalse(response.getToken().isEmpty());

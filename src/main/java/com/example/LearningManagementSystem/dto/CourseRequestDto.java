@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class CourseRequestDTO {
+public class CourseRequestDto {
 
     private String id;
 

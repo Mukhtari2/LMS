@@ -1,13 +1,13 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.dto.LessonRequestDTO;
-import com.example.LearningManagementSystem.dto.LessonResponseDTO;
+import com.example.LearningManagementSystem.dto.LessonRequestDto;
+import com.example.LearningManagementSystem.dto.LessonResponseDto;
 
 import java.util.List;
 
 public interface LessonService {
-    LessonResponseDTO addLesson (LessonRequestDTO request);
-    LessonResponseDTO viewLesson (String lessonId);
-    List<LessonResponseDTO> viewAllLessons ();
+    LessonResponseDto addLesson (LessonRequestDto request);
+    LessonResponseDto viewLesson (String lessonId);
+    List<LessonResponseDto> viewAllLessons ();
 
 }

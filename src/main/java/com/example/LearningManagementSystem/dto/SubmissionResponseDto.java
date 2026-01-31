@@ -1,20 +1,18 @@
 package com.example.LearningManagementSystem.dto;
 
 import com.example.LearningManagementSystem.Enum.Grade;
-import com.example.LearningManagementSystem.model.Assignment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Setter
 @Getter
 @ToString
 @RequiredArgsConstructor
-@AllArgsConstructor
-public class SubmissionRequestDTO {
+public class SubmissionResponseDto {
+
+    private String id;
 
     private String assignmentId;
 
@@ -25,10 +23,11 @@ public class SubmissionRequestDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d/M/yyyy")
     private LocalDate answeredAt;
 
-    private int grade;
+    private Grade grade;
 
     private String feedback;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d/M/yyyy")
     private LocalDate submittedAt;
+
 }

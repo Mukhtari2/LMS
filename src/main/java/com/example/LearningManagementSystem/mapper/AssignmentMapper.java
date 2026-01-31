@@ -1,7 +1,7 @@
 package com.example.LearningManagementSystem.mapper;
 
-import com.example.LearningManagementSystem.dto.AssignmentRequestDTO;
-import com.example.LearningManagementSystem.dto.AssignmentResponseDTO;
+import com.example.LearningManagementSystem.dto.AssignmentRequestDto;
+import com.example.LearningManagementSystem.dto.AssignmentResponseDto;
 import com.example.LearningManagementSystem.model.Assignment;
 import com.example.LearningManagementSystem.model.Course;
 import org.mapstruct.Mapper;
@@ -16,6 +16,6 @@ public interface AssignmentMapper {
     @Mapping(target = "courseId", source = "course.id")
     @Mapping(target = "title", source = "requestDTO.title")
     @Mapping(target = "description", source = "requestDTO.description")
-    Assignment toEntity(AssignmentRequestDTO requestDTO, Course course);
-    AssignmentResponseDTO toDto(Assignment assignment);
+    Assignment toEntity(AssignmentRequestDto requestDTO, Course course);
+    AssignmentResponseDto toDto(Assignment assignment);
 }

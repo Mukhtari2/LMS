@@ -1,19 +1,15 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.Enum.Role;
 import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
-import com.example.LearningManagementSystem.dto.CourseRequestDTO;
-import com.example.LearningManagementSystem.dto.CourseResponseDTO;
-import com.example.LearningManagementSystem.dto.EnrollmentResponseDTO;
+import com.example.LearningManagementSystem.dto.CourseRequestDto;
+import com.example.LearningManagementSystem.dto.CourseResponseDto;
 import com.example.LearningManagementSystem.mapper.CourseMapper;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +19,7 @@ public class CourseServiceImpl implements CourseService{
     private final CourseMapper courseMapper;
 
     @Override
-    public CourseResponseDTO registerCourse(CourseRequestDTO requestDTO) {
+    public CourseResponseDto registerCourse(CourseRequestDto requestDTO) {
         Course course = Course.builder()
                 .status(requestDTO.getStatus())
                 .description(requestDTO.getDescription())
@@ -40,7 +36,7 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public CourseResponseDTO updateCourse(String courseId, CourseRequestDTO requestDTO) {
+    public CourseResponseDto updateCourse(String courseId, CourseRequestDto requestDTO) {
        Course existingCourse = courseRepository.findById(courseId).orElseThrow(()-> new ResourceNotFoundException("No course found with the Id " + courseId));
            courseMapper.updateEntityFromDto(requestDTO, existingCourse);
            Course updatedCourse = courseRepository.save(existingCourse);
@@ -48,7 +44,7 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public List<CourseResponseDTO> viewAllCreatedCourses() {
+    public List<CourseResponseDto> viewAllCreatedCourses() {
         return courseRepository.findAll().stream().map(courseMapper::toDto).toList();
     }
 }

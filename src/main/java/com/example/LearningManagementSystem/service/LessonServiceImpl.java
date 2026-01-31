@@ -1,8 +1,8 @@
 package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
-import com.example.LearningManagementSystem.dto.LessonRequestDTO;
-import com.example.LearningManagementSystem.dto.LessonResponseDTO;
+import com.example.LearningManagementSystem.dto.LessonRequestDto;
+import com.example.LearningManagementSystem.dto.LessonResponseDto;
 import com.example.LearningManagementSystem.mapper.LessonMapper;
 import com.example.LearningManagementSystem.model.Lesson;
 import com.example.LearningManagementSystem.repository.LessonRepository;
@@ -24,7 +24,7 @@ public class LessonServiceImpl implements LessonService{
 
 
     @Override
-    public LessonResponseDTO addLesson(LessonRequestDTO request) {
+    public LessonResponseDto addLesson(LessonRequestDto request) {
         return Optional.ofNullable(courseService.findByCourseId(request.getCourseId()))
                 .map(course -> lessonMapper.toEntity(request, course))
                 .map(lessonRepository::insert)
@@ -33,14 +33,14 @@ public class LessonServiceImpl implements LessonService{
     }
 
     @Override
-    public LessonResponseDTO viewLesson(String courseId) {
+    public LessonResponseDto viewLesson(String courseId) {
         Lesson lesson = lessonRepository.findByCourseId(courseId).orElseThrow(() -> new ResourceNotFoundException
                 ("No lesson found with id " + courseId));
         return lessonMapper.toDto(lesson);
     }
 
     @Override
-    public List<LessonResponseDTO> viewAllLessons (){
+    public List<LessonResponseDto> viewAllLessons (){
         return lessonRepository.findAll().stream().map(lessonMapper::toDto).toList();
     }
 

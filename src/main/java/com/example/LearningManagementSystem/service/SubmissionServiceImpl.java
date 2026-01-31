@@ -1,17 +1,14 @@
 package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
-import com.example.LearningManagementSystem.dto.SubmissionRequestDTO;
-import com.example.LearningManagementSystem.dto.SubmissionResponseDTO;
+import com.example.LearningManagementSystem.dto.SubmissionRequestDto;
+import com.example.LearningManagementSystem.dto.SubmissionResponseDto;
 import com.example.LearningManagementSystem.mapper.SubmissionMapper;
-import com.example.LearningManagementSystem.model.Assignment;
 import com.example.LearningManagementSystem.model.Submission;
 import com.example.LearningManagementSystem.repository.SubmissionRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +21,7 @@ public class SubmissionServiceImpl implements SubmissionService{
     private final SubmissionMapper submissionMapper;
 
     @Override
-    public SubmissionResponseDTO submitAnswers(SubmissionRequestDTO requestDTO) {
+    public SubmissionResponseDto submitAnswers(SubmissionRequestDto requestDTO) {
         return Optional.ofNullable(assignmentService.findByAssignmentId(requestDTO.getAssignmentId()))
                 .map(assignmentId -> submissionMapper.toEntity(requestDTO, assignmentId))
                 .map(submissionRepository::insert)
@@ -33,7 +30,7 @@ public class SubmissionServiceImpl implements SubmissionService{
     }
 
     @Override
-    public SubmissionResponseDTO viewSubmission(String submissionId) {
+    public SubmissionResponseDto viewSubmission(String submissionId) {
         Submission id = submissionRepository.findById(submissionId).orElseThrow
                 (() -> new ResourceNotFoundException
                         ("Assignment with ID " + submissionId + " not found "));
@@ -41,7 +38,7 @@ public class SubmissionServiceImpl implements SubmissionService{
     }
 
     @Override
-    public List<SubmissionResponseDTO> viewAllSubmissions() {
+    public List<SubmissionResponseDto> viewAllSubmissions() {
             return submissionRepository.findAll()
                     .stream()
                     .map(submissionMapper::toDto)

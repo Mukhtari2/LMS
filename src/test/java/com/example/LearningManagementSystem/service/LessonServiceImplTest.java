@@ -1,10 +1,8 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.dto.CourseRequestDTO;
-import com.example.LearningManagementSystem.dto.LessonRequestDTO;
-import com.example.LearningManagementSystem.dto.LessonResponseDTO;
+import com.example.LearningManagementSystem.dto.LessonRequestDto;
+import com.example.LearningManagementSystem.dto.LessonResponseDto;
 import com.example.LearningManagementSystem.model.Course;
-import com.example.LearningManagementSystem.model.Lesson;
 import com.example.LearningManagementSystem.repository.CourseRepository;
 import com.example.LearningManagementSystem.repository.LessonRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,12 +44,12 @@ class LessonServiceImplTest {
         courseA.setId(courseId);
         Course savedCourse = courseRepository.save(courseA);
 
-        LessonRequestDTO request = new LessonRequestDTO();
+        LessonRequestDto request = new LessonRequestDto();
         request.setCourseId(savedCourse.getId());
         request.setTitle("General lesson");
         request.setContentUrl("http://www.lesson.com");
 
-        LessonResponseDTO newLesson = lessonService.addLesson(request);
+        LessonResponseDto newLesson = lessonService.addLesson(request);
 
         assertNotNull(newLesson);
         assertEquals(courseA.getId(), newLesson.getCourseId());
@@ -66,13 +64,13 @@ class LessonServiceImplTest {
         course.setId(courseId);
         courseRepository.save(course);
 
-        LessonRequestDTO lesson1 = new LessonRequestDTO();
+        LessonRequestDto lesson1 = new LessonRequestDto();
         lesson1.setCourseId(courseId);
         lesson1.setTitle("Hydrology");
         lesson1.setContentUrl("https://www.geoworldd.com");
         lessonService.addLesson(lesson1);
 
-        LessonResponseDTO savedLessons = lessonService.viewLesson(lesson1.getCourseId());
+        LessonResponseDto savedLessons = lessonService.viewLesson(lesson1.getCourseId());
         assertNotNull(savedLessons);
     }
 
@@ -83,7 +81,7 @@ class LessonServiceImplTest {
         course.setId(courseId);
         courseRepository.save(course);
 
-        LessonRequestDTO lesson1 = new LessonRequestDTO();
+        LessonRequestDto lesson1 = new LessonRequestDto();
         lesson1.setCourseId(courseId);
         lesson1.setTitle("Hydrology");
         lesson1.setContentUrl("https://www.geoworldd.com");
@@ -94,13 +92,13 @@ class LessonServiceImplTest {
         course2.setId(courseId2);
         courseRepository.save(course2);
 
-        LessonRequestDTO lesson2 = new LessonRequestDTO();
+        LessonRequestDto lesson2 = new LessonRequestDto();
         lesson2.setCourseId(courseId2);
         lesson2.setTitle("Hydrology");
         lesson2.setContentUrl("https://www.geoworldd.com");
         lessonService.addLesson(lesson2);
 
-        List<LessonResponseDTO> viewAll = lessonService.viewAllLessons();
+        List<LessonResponseDto> viewAll = lessonService.viewAllLessons();
 
         assertNotNull(viewAll);
         assertEquals(2, viewAll.size());

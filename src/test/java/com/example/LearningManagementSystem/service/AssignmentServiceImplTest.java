@@ -1,7 +1,7 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.dto.AssignmentRequestDTO;
-import com.example.LearningManagementSystem.dto.AssignmentResponseDTO;
+import com.example.LearningManagementSystem.dto.AssignmentRequestDto;
+import com.example.LearningManagementSystem.dto.AssignmentResponseDto;
 import com.example.LearningManagementSystem.model.Assignment;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.AssignmentRepository;
@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,13 +42,13 @@ class AssignmentServiceImplTest {
         course.setId(courseId);
         courseRepository.save(course);
 
-        AssignmentRequestDTO assignment = AssignmentRequestDTO.builder()
+        AssignmentRequestDto assignment = AssignmentRequestDto.builder()
                 .title("measurement calculation")
                 .description("physical health education")
                 .dueDate(LocalDate.of(2026,4,23))
                 .courseId(course.getId())
                 .build();
-        AssignmentResponseDTO responseDTO = assignmentService.createAssignment(assignment);
+        AssignmentResponseDto responseDTO = assignmentService.createAssignment(assignment);
         assertNotNull(responseDTO);
         assertEquals("physical health education", responseDTO.getDescription());
     }
@@ -61,14 +60,14 @@ class AssignmentServiceImplTest {
         course.setId(courseId);
         courseRepository.save(course);
 
-        AssignmentRequestDTO assignment = AssignmentRequestDTO.builder()
+        AssignmentRequestDto assignment = AssignmentRequestDto.builder()
                 .title("measurement calculation")
                 .description("physical health education")
                 .dueDate(LocalDate.of(2026,4,23))
                 .courseId(course.getId())
                 .build();
         assignmentService.createAssignment(assignment);
-        AssignmentResponseDTO view = assignmentService.viewAssignment(assignment.getCourseId());
+        AssignmentResponseDto view = assignmentService.viewAssignment(assignment.getCourseId());
         assertNotNull(view);
         assertEquals(course.getId(), view.getCourseId());
         assertEquals(LocalDate.of(2026,4,23), view.getDueDate());

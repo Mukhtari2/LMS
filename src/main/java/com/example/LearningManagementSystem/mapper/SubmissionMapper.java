@@ -1,8 +1,8 @@
 package com.example.LearningManagementSystem.mapper;
 
 import com.example.LearningManagementSystem.Enum.Grade;
-import com.example.LearningManagementSystem.dto.SubmissionRequestDTO;
-import com.example.LearningManagementSystem.dto.SubmissionResponseDTO;
+import com.example.LearningManagementSystem.dto.SubmissionRequestDto;
+import com.example.LearningManagementSystem.dto.SubmissionResponseDto;
 import com.example.LearningManagementSystem.model.Assignment;
 import com.example.LearningManagementSystem.model.Submission;
 import org.mapstruct.Mapper;
@@ -10,7 +10,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, imports = {LocalDate.class})
 public interface SubmissionMapper {
@@ -23,9 +22,9 @@ public interface SubmissionMapper {
     @Mapping(target = "grade", source = "requestDTO.grade")
     @Mapping(target = "feedback", source = "requestDTO.feedback")
 
-    Submission toEntity(SubmissionRequestDTO requestDTO, Assignment assignment);
+    Submission toEntity(SubmissionRequestDto requestDTO, Assignment assignment);
 
-    SubmissionResponseDTO toDto(Submission submission);
+    SubmissionResponseDto toDto(Submission submission);
 
     default Grade mapGrade(int gradeValue) {
         if (gradeValue >= 70) return Grade.EXCELLENT;

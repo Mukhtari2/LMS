@@ -2,8 +2,8 @@ package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Enum.Role;
 import com.example.LearningManagementSystem.Enum.Status;
-import com.example.LearningManagementSystem.dto.CourseRequestDTO;
-import com.example.LearningManagementSystem.dto.CourseResponseDTO;
+import com.example.LearningManagementSystem.dto.CourseRequestDto;
+import com.example.LearningManagementSystem.dto.CourseResponseDto;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.CourseRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +31,7 @@ class CourseServiceImplTest {
 
     @Test
     void registerCourse() {
-        CourseRequestDTO newCourse = new CourseRequestDTO();
+        CourseRequestDto newCourse = new CourseRequestDto();
         newCourse.setDescription("Agro_Engineering");
         newCourse.setRole(Role.TEACHER);
         newCourse.setTitle("AGR101");
@@ -39,7 +39,7 @@ class CourseServiceImplTest {
         newCourse.setStatus(Status.DRAFT);
 
         assertEquals(0, courseRepository.count());
-        CourseResponseDTO registerCourse = courseService.registerCourse(newCourse);
+        CourseResponseDto registerCourse = courseService.registerCourse(newCourse);
         assertEquals(1, courseRepository.count());
 
         assertNotNull(registerCourse);
@@ -48,10 +48,10 @@ class CourseServiceImplTest {
 
     @Test
     void findByCourseId() {
-        CourseRequestDTO request = new CourseRequestDTO();
+        CourseRequestDto request = new CourseRequestDto();
         request.setTitle("GEO@121");
         request.setTeacherId("G120");
-        CourseResponseDTO savedCourse = courseService.registerCourse(request);
+        CourseResponseDto savedCourse = courseService.registerCourse(request);
 
         Course foundCourse = courseService.findByCourseId(savedCourse.getId());
         assertNotNull(foundCourse);
@@ -60,17 +60,17 @@ class CourseServiceImplTest {
 
     @Test
     void updateCourse() {
-        CourseRequestDTO request = new CourseRequestDTO();
+        CourseRequestDto request = new CourseRequestDto();
         request.setTitle("Old Title");
         request.setStatus(Status.DRAFT);
-        CourseResponseDTO savedCourse = courseService.registerCourse(request);
+        CourseResponseDto savedCourse = courseService.registerCourse(request);
 
-        CourseRequestDTO updateRequest = new CourseRequestDTO();
+        CourseRequestDto updateRequest = new CourseRequestDto();
         updateRequest.setTitle("New Updated Title");
         updateRequest.setStatus(Status.PUBLISH);
 
         assertEquals(1, courseRepository.count());
-        CourseResponseDTO updatedCourse = courseService.updateCourse(savedCourse.getId(), updateRequest);
+        CourseResponseDto updatedCourse = courseService.updateCourse(savedCourse.getId(), updateRequest);
         assertNotNull(updatedCourse);
         assertEquals("New Updated Title", updatedCourse.getTitle());
         assertEquals(Status.PUBLISH, updatedCourse.getStatus());

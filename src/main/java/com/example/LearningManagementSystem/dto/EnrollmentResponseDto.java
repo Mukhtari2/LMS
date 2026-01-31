@@ -1,4 +1,6 @@
 package com.example.LearningManagementSystem.dto;
+
+//import com.example.LearningManagementSystem.model.Course;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -7,18 +9,16 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @ToString
-@Builder
 @RequiredArgsConstructor
-@AllArgsConstructor
-public class AssignmentRequestDTO {
+public class EnrollmentResponseDto {
+
+    private String id;
+
+    private String studentId;
 
     private String courseId;
 
-    private String title;
-
-    private String description;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "d/M/yyyy")
-    private LocalDate dueDate;
+    private LocalDate enrolledAt;
 
 }

@@ -1,7 +1,7 @@
 package com.example.LearningManagementSystem.mapper;
 
-import com.example.LearningManagementSystem.dto.LessonRequestDTO;
-import com.example.LearningManagementSystem.dto.LessonResponseDTO;
+import com.example.LearningManagementSystem.dto.LessonRequestDto;
+import com.example.LearningManagementSystem.dto.LessonResponseDto;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.model.Lesson;
 import org.mapstruct.Mapper;
@@ -16,7 +16,7 @@ public interface LessonMapper {
     @Mapping(target = "course", source = "courseId")
     @Mapping(target = "title", source = "lessonRequestDTO.title")
     @Mapping(target = "contentUrl", source = "lessonRequestDTO.contentUrl")
-    Lesson toEntity(LessonRequestDTO lessonRequestDTO, Course courseId);
+    Lesson toEntity(LessonRequestDto lessonRequestDTO, Course courseId);
     @Mapping(target = "courseId", source = "lesson.course.id")
-    LessonResponseDTO toDto(Lesson lesson);
+    LessonResponseDto toDto(Lesson lesson);
 }

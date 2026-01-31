@@ -1,10 +1,8 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.Enum.Role;
 import com.example.LearningManagementSystem.Enum.Status;
-import com.example.LearningManagementSystem.dto.CourseResponseDTO;
-import com.example.LearningManagementSystem.dto.EnrollmentRequestDTO;
-import com.example.LearningManagementSystem.dto.EnrollmentResponseDTO;
+import com.example.LearningManagementSystem.dto.EnrollmentRequestDto;
+import com.example.LearningManagementSystem.dto.EnrollmentResponseDto;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.repository.CourseRepository;
 import com.example.LearningManagementSystem.repository.EnrollmentRepository;
@@ -50,11 +48,11 @@ class EnrollmentServiceImplTest {
         course.setStatus(Status.PUBLISH);
         Course newCourse = courseRepository.save(course);
 
-        EnrollmentRequestDTO request = new EnrollmentRequestDTO();
+        EnrollmentRequestDto request = new EnrollmentRequestDto();
         request.setCourseId(newCourse.getId() );
         request.setStudentId("2015/1/57125PL");
 
-        EnrollmentResponseDTO response = enrollmentService.enrollPublishedCourse(request);
+        EnrollmentResponseDto response = enrollmentService.enrollPublishedCourse(request);
 
         assertNotNull(response);
         assertEquals(courseId, response.getCourseId());
@@ -84,17 +82,17 @@ class EnrollmentServiceImplTest {
         courseB.setStatus(Status.DRAFT);
         Course course2 = courseRepository.save(courseB);
 
-        EnrollmentRequestDTO enrollmentRequest = new EnrollmentRequestDTO();
+        EnrollmentRequestDto enrollmentRequest = new EnrollmentRequestDto();
         enrollmentRequest.setCourseId(course1.getId());
         enrollmentRequest.setStudentId("2015/1/57654PL");
         enrollmentService.enrollPublishedCourse(enrollmentRequest);
 
-        EnrollmentRequestDTO enrollmentRequest2 = new EnrollmentRequestDTO();
+        EnrollmentRequestDto enrollmentRequest2 = new EnrollmentRequestDto();
         enrollmentRequest2.setCourseId(course2.getId());
         enrollmentRequest2.setStudentId("2015/1/52112PL");
         enrollmentService.enrollPublishedCourse(enrollmentRequest2);
 
-        List<EnrollmentResponseDTO> allCourses = enrollmentService.viewAllEnrolledCourses();
+        List<EnrollmentResponseDto> allCourses = enrollmentService.viewAllEnrolledCourses();
         assertNotNull(allCourses);
         assertEquals("2015/1/52112PL", allCourses.get(1).getStudentId() );
     }

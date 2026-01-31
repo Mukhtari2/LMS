@@ -1,17 +1,17 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.dto.CourseRequestDTO;
-import com.example.LearningManagementSystem.dto.CourseResponseDTO;
+import com.example.LearningManagementSystem.dto.CourseRequestDto;
+import com.example.LearningManagementSystem.dto.CourseResponseDto;
 import com.example.LearningManagementSystem.model.Course;
 
 import java.util.List;
 
 public interface CourseService {
-    CourseResponseDTO registerCourse(CourseRequestDTO requestDTO);
+    CourseResponseDto registerCourse(CourseRequestDto requestDTO);
 
-    CourseResponseDTO updateCourse(String courseId, CourseRequestDTO requestDTO);
+    CourseResponseDto updateCourse(String courseId, CourseRequestDto requestDTO);
 
     Course findByCourseId(String courseId);
 
-    List<CourseResponseDTO> viewAllCreatedCourses();
+    List<CourseResponseDto> viewAllCreatedCourses();
 }

@@ -2,15 +2,15 @@ package com.example.LearningManagementSystem.controller;
 
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationRequest;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationResponse;
+import com.example.LearningManagementSystem.dto.UserRequestDto;
+import com.example.LearningManagementSystem.dto.UserResponseDto;
 import com.example.LearningManagementSystem.service.AuthenticationService;
+import com.example.LearningManagementSystem.service.UserServices;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,24 +19,33 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthenticationService authenticationService;
+    private final UserServices userServices;
 
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register (@Valid @RequestBody AuthenticationRequest request){
         AuthenticationResponse registerRequest = authenticationService.register(request);
         return new ResponseEntity<>(registerRequest, HttpStatus.CREATED);
-        
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
-        return ResponseEntity.ok( authenticationService.authenticate(request));
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){
+        return ResponseEntity.ok( authenticationService.login(request));
     }
+
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/create-user")
+    public ResponseEntity<UserResponseDto> createNewUser (@Valid @RequestBody UserRequestDto request){
+        UserResponseDto createUser = userServices.createUser(request);
+        return new ResponseEntity<>(createUser, HttpStatus.CREATED);
+    }
+
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/remove-User/{userId}")
     public ResponseEntity<?> removeUser(@PathVariable String userId){
-        authenticationService.removeUser(userId);
+        userServices.removeUser(userId);
         return ResponseEntity.ok("User deleted successfully");
     }
 

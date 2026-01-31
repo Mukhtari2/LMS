@@ -1,7 +1,7 @@
 package com.example.LearningManagementSystem.mapper;
 
-import com.example.LearningManagementSystem.dto.EnrollmentRequestDTO;
-import com.example.LearningManagementSystem.dto.EnrollmentResponseDTO;
+import com.example.LearningManagementSystem.dto.EnrollmentRequestDto;
+import com.example.LearningManagementSystem.dto.EnrollmentResponseDto;
 import com.example.LearningManagementSystem.model.Course;
 import com.example.LearningManagementSystem.model.Enrollment;
 import org.mapstruct.Mapper;
@@ -17,7 +17,7 @@ public interface EnrollmentMapper {
     @Mapping(target = "studentId", source = "request.studentId")
     @Mapping(target = "enrolledAt", expression = "java(LocalDate.now())")
 
-    Enrollment toEntity(EnrollmentRequestDTO request, Course course);
-    EnrollmentResponseDTO toDto(Enrollment enrollment);
+    Enrollment toEntity(EnrollmentRequestDto request, Course course);
+    EnrollmentResponseDto toDto(Enrollment enrollment);
 }
 

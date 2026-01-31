@@ -1,8 +1,8 @@
 package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
-import com.example.LearningManagementSystem.dto.AssignmentRequestDTO;
-import com.example.LearningManagementSystem.dto.AssignmentResponseDTO;
+import com.example.LearningManagementSystem.dto.AssignmentRequestDto;
+import com.example.LearningManagementSystem.dto.AssignmentResponseDto;
 import com.example.LearningManagementSystem.mapper.AssignmentMapper;
 import com.example.LearningManagementSystem.model.Assignment;
 import com.example.LearningManagementSystem.repository.AssignmentRepository;
@@ -21,7 +21,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
 
     @Override
-    public AssignmentResponseDTO viewAssignment(String courseId) {
+    public AssignmentResponseDto viewAssignment(String courseId) {
        return assignmentRepository.findByCourseId(courseId)
                 .map(assignmentMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException
@@ -29,7 +29,7 @@ public class AssignmentServiceImpl implements AssignmentService {
     }
 
     @Override
-    public AssignmentResponseDTO createAssignment(AssignmentRequestDTO requestDTO) {
+    public AssignmentResponseDto createAssignment(AssignmentRequestDto requestDTO) {
         return Optional.ofNullable(courseService.findByCourseId(requestDTO.getCourseId()))
                 .map(courseId -> assignmentMapper.toEntity(requestDTO, courseId))
                 .map(assignmentRepository::insert)

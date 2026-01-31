@@ -55,7 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponse login(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -68,14 +68,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-    }
-
-    @Override
-    public void removeUser(String userId) {
-        if (!userRepository.existsById(userId)) {
-            throw new ResourceNotFoundException("User with id " + userId + " not found");
-        }
-        userRepository.deleteById(userId);
     }
 
 }
