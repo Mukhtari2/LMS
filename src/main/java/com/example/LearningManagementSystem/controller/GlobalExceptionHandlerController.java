@@ -26,6 +26,7 @@ public class GlobalExceptionHandlerController {
             FieldError error = fieldErrors.get(i);
             errorMessage.append(error.getDefaultMessage());
 
+
             // Add a comma and space if it's not the last error
             if (i < fieldErrors.size() - 1) {
                 errorMessage.append(", ");
