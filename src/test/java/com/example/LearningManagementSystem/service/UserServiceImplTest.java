@@ -62,17 +62,17 @@ class UserServiceImplTest {
                     .role(Role.STUDENT)
                     .build();
             User savedUser = userRepository.save(user);
-            String userId = savedUser.getId();
+            String userEmail = savedUser.getEmail();
 
             UserRequestDto updateRequest = UserRequestDto.builder()
                     .name("Musa  Daud")
                     .password("12345")
                     .build();
 
-            UserResponseDto response = userServices.updateUser(userId, updateRequest);
+            UserResponseDto response = userServices.updateUser(userEmail, updateRequest);
             assertNotNull(response);
 
-            User updatedDbUser = userRepository.findById(userId).orElseThrow();
+            User updatedDbUser = userRepository.findByEmail(userEmail).orElseThrow();
             assertEquals("Musa  Daud", updatedDbUser.getName());
             assertTrue(passwordEncoder.matches("12345", updatedDbUser.getPassword()));
             assertEquals("musa@gmail.com", updatedDbUser.getEmail());

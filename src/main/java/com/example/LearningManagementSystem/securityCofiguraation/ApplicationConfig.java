@@ -4,6 +4,7 @@ import com.example.LearningManagementSystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -25,6 +26,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
+    @Lazy
     private final UserRepository repository;
 
     @Bean

@@ -1,13 +1,13 @@
 package com.example.LearningManagementSystem.dto;
 
 import com.example.LearningManagementSystem.Enum.Role;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @Builder
+@NoArgsConstructor  // <--- ADD THIS
+@AllArgsConstructor
 public class UserRequestDto {
 
     private String name;
