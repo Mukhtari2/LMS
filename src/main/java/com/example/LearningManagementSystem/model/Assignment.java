@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "assignments")
-public class Assignment {
+public class Assignment extends BaseAuditEntity{
     @Id
     private String id;
 

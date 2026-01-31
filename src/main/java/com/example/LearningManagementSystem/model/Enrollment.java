@@ -23,7 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Document(collection = "enrollments")
 @CompoundIndex(name = "student_course_idx", def = "{'studentId': 1, 'courseId': 1}", unique = true)
-public class Enrollment {
+public class Enrollment extends BaseAuditEntity {
 
     @Id
     private String id;

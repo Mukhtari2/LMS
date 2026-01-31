@@ -1,8 +1,6 @@
 package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Enum.Role;
-import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationRequest;
-import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationResponse;
 import com.example.LearningManagementSystem.dto.UserRequestDto;
 import com.example.LearningManagementSystem.dto.UserResponseDto;
 import com.example.LearningManagementSystem.model.User;
@@ -77,10 +75,8 @@ class UserServiceImplTest {
             User updatedDbUser = userRepository.findById(userId).orElseThrow();
             assertEquals("Musa  Daud", updatedDbUser.getName());
             assertTrue(passwordEncoder.matches("12345", updatedDbUser.getPassword()));
-
             assertEquals("musa@gmail.com", updatedDbUser.getEmail());
         }
-
 
     @Test
     void removeUser() {

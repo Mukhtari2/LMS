@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "submissions")
-public class Submission {
+public class Submission extends BaseAuditEntity {
 
    @Id
     private String id;

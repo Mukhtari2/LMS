@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "lessons")
-public class Lesson {
+public class Lesson extends BaseAuditEntity {
 
     @Id
     private String id;

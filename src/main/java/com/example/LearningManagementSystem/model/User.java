@@ -23,7 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "users")
-public class User implements UserDetails {
+public class User extends BaseAuditEntity implements UserDetails {
 
     @Id
     private String id;

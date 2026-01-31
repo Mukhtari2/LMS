@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "courses")
-public class Course {
+public class Course extends BaseAuditEntity {
     @Id
     private String id;
 
