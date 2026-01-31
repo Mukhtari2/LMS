@@ -51,12 +51,36 @@ class UserServiceImplTest {
 
         User savedUser = userRepository.findByEmail("musa@gmail.com").orElseThrow();
         assertEquals("musa@gmail.com", savedUser.getEmail());
-        assertTrue(passwordEncoder.matches("1234", savedUser.getPassword()));
+        assertTrue(passwordEncoder.matches("1234", savedUser.getPassword())
+        );
     }
 
-    @Test
-    void updateUser() {
-    }
+        @Test
+        void updateUser() {
+            User user = User.builder()
+                    .name("Musa Abdul Daud")
+                    .email("musa@gmail.com")
+                    .password(passwordEncoder.encode("1111"))
+                    .role(Role.STUDENT)
+                    .build();
+            User savedUser = userRepository.save(user);
+            String userId = savedUser.getId();
+
+            UserRequestDto updateRequest = UserRequestDto.builder()
+                    .name("Musa  Daud")
+                    .password("12345")
+                    .build();
+
+            UserResponseDto response = userServices.updateUser(userId, updateRequest);
+            assertNotNull(response);
+
+            User updatedDbUser = userRepository.findById(userId).orElseThrow();
+            assertEquals("Musa  Daud", updatedDbUser.getName());
+            assertTrue(passwordEncoder.matches("12345", updatedDbUser.getPassword()));
+
+            assertEquals("musa@gmail.com", updatedDbUser.getEmail());
+        }
+
 
     @Test
     void removeUser() {
