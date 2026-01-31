@@ -26,7 +26,7 @@ public class TeacherController {
     private final AssignmentService assignmentService;
 
 
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("#userId == authentication.principal.id")
     @PostMapping("/update-user/{userId}")
     public ResponseEntity<UserResponseDto> updateUser (@Valid @PathVariable String userId, @RequestBody UserRequestDto userRequest){
         UserResponseDto updatedUser = userServices.updateUser(userId, userRequest);
@@ -52,7 +52,7 @@ public class TeacherController {
     }
 
     @PostMapping("/addLesson")
-    public ResponseEntity<LessonResponseDto> addLesson (LessonRequestDto lessonRequestDTO){
+    public ResponseEntity<LessonResponseDto> addLesson (@RequestBody LessonRequestDto lessonRequestDTO){
         LessonResponseDto newLesson = lessonService.addLesson(lessonRequestDTO);
         return new ResponseEntity<>(newLesson, HttpStatus.CREATED);
     }

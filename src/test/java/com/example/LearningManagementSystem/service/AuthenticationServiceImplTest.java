@@ -24,6 +24,9 @@ class AuthenticationServiceImplTest {
     private UserRepository userRepository;
 
     @Autowired
+    private UserServices userServices;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -81,7 +84,7 @@ class AuthenticationServiceImplTest {
         user.setName("Lookman");
         userRepository.save(user);
 
-        authenticationService.removeUser(user.getId());
+        userServices.removeUser(user.getId());
         assertNotNull(user);
         assertEquals("23L", user.getId());
     }
