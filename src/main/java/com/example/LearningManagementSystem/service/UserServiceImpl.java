@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserServices{
                 .build();
         tokenRepository.save(verificationToken);
 
-        // 4. Send Email
         sendEmail(user.getEmail(), code);
 
         return UserResponseDto.builder()
@@ -63,7 +62,7 @@ public class UserServiceImpl implements UserServices{
                     .orElseThrow(() -> new RuntimeException("User not found"));
             user.setEnabled(true);
             userRepository.save(user);
-            tokenRepository.delete(tokenOpt.get()); // Clear token after use
+            tokenRepository.delete(tokenOpt.get());
             return true;
         }
         return false;

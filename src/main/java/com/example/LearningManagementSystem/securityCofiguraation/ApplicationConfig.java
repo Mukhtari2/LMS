@@ -58,9 +58,9 @@ public class ApplicationConfig {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (authentication == null || !authentication.isAuthenticated()
                     || authentication instanceof AnonymousAuthenticationToken) {
-                return Optional.of("SYSTEM"); // For registrations or system tasks
+                return Optional.of("SYSTEM");
             }
-            return Optional.of(authentication.getName()); // Returns the email of the logged-in user
+            return Optional.of(authentication.getName());
         };
     }
 }

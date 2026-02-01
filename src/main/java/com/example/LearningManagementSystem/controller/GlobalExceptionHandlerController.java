@@ -2,6 +2,8 @@ package com.example.LearningManagementSystem.controller;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +19,17 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandlerController {
+
+
+    @ExceptionHandler(DisabledException.class)
+    public ResponseEntity<String> handleDisabled(DisabledException ex) {
+        return new ResponseEntity<>("Account is not verified. Please check your email.", HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<String> handleBadCredentials(BadCredentialsException ex) {
+        return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
+    }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<String> handleDuplicateEmail(DataIntegrityViolationException ex) {
