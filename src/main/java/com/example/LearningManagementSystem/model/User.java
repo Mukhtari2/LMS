@@ -41,9 +41,10 @@ public class User extends BaseAuditEntity implements UserDetails {
     @Size(min = 4, message = "Password must be at least 8 characters long")
     private String password;
 
+    private boolean enabled = false;
+
     @NotNull(message = "Role is required")
     private Role role;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -56,22 +57,16 @@ public class User extends BaseAuditEntity implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
-    }
+    public boolean isAccountNonExpired() { return true; }
 
     @Override
-    public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
-    }
+    public boolean isAccountNonLocked() { return true; }
 
     @Override
-    public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
-    }
+    public boolean isCredentialsNonExpired() { return true; }
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return this.enabled;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
+import com.example.LearningManagementSystem.exception.ResourceNotFoundException;
 import com.example.LearningManagementSystem.dto.EnrollmentRequestDto;
 import com.example.LearningManagementSystem.dto.EnrollmentResponseDto;
 import com.example.LearningManagementSystem.mapper.EnrollmentMapper;

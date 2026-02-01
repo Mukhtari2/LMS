@@ -1,6 +1,6 @@
 package com.example.LearningManagementSystem.service;
 
-import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
+import com.example.LearningManagementSystem.exception.ResourceNotFoundException;
 import com.example.LearningManagementSystem.dto.SubmissionRequestDto;
 import com.example.LearningManagementSystem.dto.SubmissionResponseDto;
 import com.example.LearningManagementSystem.mapper.SubmissionMapper;

@@ -1,7 +1,6 @@
 package com.example.LearningManagementSystem.service;
 
 import com.example.LearningManagementSystem.Enum.Role;
-import com.example.LearningManagementSystem.Exception.ResourceNotFoundException;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationRequest;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.AuthenticationResponse;
 import com.example.LearningManagementSystem.authenticationAndAuthorization.JwtService;
@@ -9,7 +8,6 @@ import com.example.LearningManagementSystem.model.User;
 import com.example.LearningManagementSystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

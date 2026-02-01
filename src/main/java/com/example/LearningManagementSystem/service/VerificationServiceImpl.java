@@ -14,11 +14,11 @@ public class VerificationServiceImpl {
 
 
     private final JavaMailSender mailSender;
-    private final UserRepository userRepository; // Example repository
+    private final UserRepository userRepository;
 
     public String generateVerificationCode() {
         SecureRandom random = new SecureRandom();
-        int code = 1000 + random.nextInt(9000); // Generates 1000-9999
+        int code = 1000 + random.nextInt(9000);
         return String.valueOf(code);
     }
 

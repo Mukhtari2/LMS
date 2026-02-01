@@ -7,4 +7,5 @@ public interface UserServices {
     UserResponseDto createUser (UserRequestDto requestDto);
     UserResponseDto updateUser (String userId, UserRequestDto userRequestDto);
     void removeUser (String userId);
+    boolean verifyCode(String email, String code);
 }
