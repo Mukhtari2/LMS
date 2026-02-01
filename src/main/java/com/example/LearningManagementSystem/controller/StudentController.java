@@ -28,13 +28,13 @@ public class StudentController {
 
     @PreAuthorize("#userId == authentication.principal.id")
     @PostMapping("/update-user/{userId}")
-    public ResponseEntity<UserResponseDto> updateUser (@Valid @PathVariable String userId, @RequestBody UserRequestDto userRequest){
+    public ResponseEntity<UserResponseDto> updateUser (@PathVariable String userId, @Valid @RequestBody UserRequestDto userRequest){
         UserResponseDto updatedUser = userServices.updateUser(userId, userRequest);
         return ResponseEntity.ok(updatedUser);
     }
 
     @PostMapping("/enroll")
-    public ResponseEntity<EnrollmentResponseDto> enrolPublishedCourse(@RequestBody EnrollmentRequestDto enrollmentRequestDTO) {
+    public ResponseEntity<EnrollmentResponseDto> enrolPublishedCourse(@Valid @RequestBody EnrollmentRequestDto enrollmentRequestDTO) {
         EnrollmentResponseDto enroll = enrollmentService.enrollPublishedCourse(enrollmentRequestDTO);
         return new ResponseEntity<>(enroll, HttpStatus.CREATED);
     }
@@ -46,7 +46,7 @@ public class StudentController {
     }
 
     @PostMapping("/submit-answer")
-    public ResponseEntity<SubmissionResponseDto>  submitAnswers(@RequestBody SubmissionRequestDto submissionRequestDTO){
+    public ResponseEntity<SubmissionResponseDto>  submitAnswers(@Valid @RequestBody SubmissionRequestDto submissionRequestDTO){
         SubmissionResponseDto responseDTO = submissionService.submitAnswers(submissionRequestDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }

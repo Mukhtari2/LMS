@@ -34,13 +34,13 @@ public class TeacherController {
     }
 
     @PostMapping("/register-course")
-    public ResponseEntity<CourseResponseDto> registerCourse (@RequestBody CourseRequestDto courseRequestDTO){
+    public ResponseEntity<CourseResponseDto> registerCourse (@Valid @RequestBody CourseRequestDto courseRequestDTO){
         CourseResponseDto courseResponseDTO = courseService.registerCourse(courseRequestDTO);
         return new ResponseEntity<>(courseResponseDTO, HttpStatus.CREATED);
     }
 
     @PutMapping("/update-course/{courseId}")
-    public ResponseEntity<CourseResponseDto> updateCourse (@PathVariable String courseId, @RequestBody CourseRequestDto requestDTO){
+    public ResponseEntity<CourseResponseDto> updateCourse (@Valid @PathVariable String courseId, @RequestBody CourseRequestDto requestDTO){
         CourseResponseDto responseDTO = courseService.updateCourse(courseId, requestDTO);
         return ResponseEntity.ok(responseDTO);
     }
@@ -52,7 +52,7 @@ public class TeacherController {
     }
 
     @PostMapping("/addLesson")
-    public ResponseEntity<LessonResponseDto> addLesson (@RequestBody LessonRequestDto lessonRequestDTO){
+    public ResponseEntity<LessonResponseDto> addLesson (@Valid @RequestBody LessonRequestDto lessonRequestDTO){
         LessonResponseDto newLesson = lessonService.addLesson(lessonRequestDTO);
         return new ResponseEntity<>(newLesson, HttpStatus.CREATED);
     }
@@ -70,7 +70,7 @@ public class TeacherController {
     }
 
     @PostMapping("/create-Assignment")
-    public ResponseEntity<AssignmentResponseDto> createAssignment (@RequestBody AssignmentRequestDto assignmentRequestDTO) {
+    public ResponseEntity<AssignmentResponseDto> createAssignment (@Valid @RequestBody AssignmentRequestDto assignmentRequestDTO) {
         AssignmentResponseDto responseDTO = assignmentService.createAssignment(assignmentRequestDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
