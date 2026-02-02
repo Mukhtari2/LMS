@@ -27,7 +27,7 @@ public class StudentController {
 
 
     @PreAuthorize("#userId == authentication.principal.id")
-    @PostMapping("/update-user/{userId}")
+    @PutMapping("/update-user/{userId}")
     public ResponseEntity<UserResponseDto> updateUser (@PathVariable String userId, @Valid @RequestBody UserRequestDto userRequest){
         UserResponseDto updatedUser = userServices.updateUser(userId, userRequest);
         return ResponseEntity.ok(updatedUser);

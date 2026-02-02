@@ -1,14 +1,12 @@
 package com.example.LearningManagementSystem.controller;
 
+import com.example.LearningManagementSystem.dto.TokenVerificationRequestDto;
 import com.example.LearningManagementSystem.service.UserServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/verification")
@@ -19,8 +17,8 @@ public class TokenVerificationController {
     private UserServices userServices;
 
     @PostMapping("/verify")
-    public ResponseEntity<String> verifyEmail(@RequestParam String email, @RequestParam String code) {
-        boolean isVerified = userServices.verifyCode(email, code); // Example service call
+    public ResponseEntity<String> verifyEmail(@RequestBody TokenVerificationRequestDto requestDto) {
+        boolean isVerified = userServices.verifyCode(requestDto.getEmail(), requestDto.getCode()); // Example service call
         if (isVerified) {
             return ResponseEntity.ok("Email verified successfully!");
         }
