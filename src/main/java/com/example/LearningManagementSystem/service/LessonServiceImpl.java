@@ -29,7 +29,7 @@ public class LessonServiceImpl implements LessonService{
                 .map(course -> lessonMapper.toEntity(request, course))
                 .map(lessonRepository::insert)
                 .map(lessonMapper::toDto)
-                .orElseThrow(() -> new ResourceNotFoundException("No course Id available for adding lesson"));
+                .orElseThrow(() -> new ResourceNotFoundException("No course Id available for adding lesson 😒"));
     }
 
     @Override
